@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
+
+import { cn } from '@/lig/className'
+
 import './globals.css'
 
 const roboto = Roboto({
@@ -17,7 +20,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={roboto.className}>{children}</body>
+            <body className={cn('h-screen', roboto.className)}>{children}</body>
         </html>
     )
 }
