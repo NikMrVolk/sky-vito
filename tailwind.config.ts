@@ -23,6 +23,9 @@ const config: Config = {
             spacing: {
                 mainLayoutCalc: 'calc(50% - 35rem);',
             },
+            borderRadius: {
+                mobileSearchInput: '1.875rem', // 30px
+            },
         },
     },
     plugins: [],
