@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 
+import Footer from '@/components/footer/Footer'
+import Header from '@/components/header/Header'
 import { cn } from '@/lig/className'
 
 import './globals.css'
-import Header from '@/components/header/Header'
 
 const roboto = Roboto({
     weight: ['400', '700'],
@@ -21,9 +22,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={cn('h-screen', roboto.className)}>
+            <body className={cn('flex h-screen flex-col justify-between', roboto.className)}>
                 <Header />
-                {children}
+                <main className="h-full">{children}</main>
+                <Footer />
             </body>
         </html>
     )

@@ -26,6 +26,9 @@ const config: Config = {
             borderRadius: {
                 mobileSearchInput: '1.875rem', // 30px
             },
+            boxShadow: {
+                mobileFooter: '0 4px 25px 0px rgba(0, 0, 0, 0.1)',
+            },
         },
     },
     plugins: [],
