@@ -18,6 +18,7 @@ const config: Config = {
             },
             colors: {
                 layoutBlue: '#009EE4',
+                layoutBlueHover: '#0080C1',
             },
             spacing: {
                 mainLayoutCalc: 'calc(50% - 35rem);',

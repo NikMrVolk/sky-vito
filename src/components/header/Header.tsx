@@ -1,11 +1,12 @@
 import Image from 'next/image'
 
 import BlockWrapper from '../common/wrappers/BlockWrapper'
+import Button from '../UI/Button'
 
 export default function Header() {
     return (
-        <header className="flex h-14 items-center bg-layoutBlue sm:h-20">
-            <BlockWrapper>
+        <BlockWrapper className="bg-layoutBlue">
+            <header className="flex h-14 items-center justify-between sm:h-20 sm:justify-end">
                 <Image
                     width={32}
                     height={32}
@@ -13,7 +14,11 @@ export default function Header() {
                     alt="logo"
                     className="sm:hidden"
                 />
-            </BlockWrapper>
-        </header>
+                <div className="hidden gap-2.5 sm:flex">
+                    <Button className="border">Разместить объявление</Button>
+                    <Button className="border">Личный кобинет</Button>
+                </div>
+            </header>
+        </BlockWrapper>
     )
 }
