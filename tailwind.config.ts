@@ -8,6 +8,9 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            screens: {
+                xl: '1160px',
+            },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'gradient-conic':
@@ -15,6 +18,9 @@ const config: Config = {
             },
             colors: {
                 layoutBlue: '#009EE4',
+            },
+            spacing: {
+                mainLayoutCalc: 'calc(50% - 35rem);',
             },
         },
     },
