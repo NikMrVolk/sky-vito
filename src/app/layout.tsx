@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 
+import SearchBar from '@/components/common/SearchBar'
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import { cn } from '@/lig/className'
@@ -23,7 +24,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en">
             <body className={cn('flex h-screen flex-col justify-between', roboto.className)}>
-                <Header />
+                <div>
+                    <Header />
+                    <SearchBar />
+                </div>
+
                 <main className="h-full">{children}</main>
                 <Footer />
             </body>

@@ -19,7 +19,7 @@ export default function Header() {
                         alt="logo"
                         className="h-8 w-8"
                     />
-                    <SearchInput type="text" placeholder="Поиск" className="w-full" />
+                    <SearchInput placeholder="Поиск" className="w-full rounded-mobileSearchInput" />
                 </div>
                 <div className="hidden gap-2.5 sm:flex">
                     <Button className="border">Разместить объявление</Button>

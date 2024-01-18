@@ -22,7 +22,10 @@ const config: Config = {
                 layoutGray: '#5F5F5F',
             },
             spacing: {
+                '3.25': '0.8125rem', // 13px
+                '9.25': '2.3125rem', // 37px
                 '13': '3.25rem', // 52px
+                '15': '3.75rem', // 60px
                 '33': '8.25rem', // 132px
                 '34.25': '8.5625rem', // 137px
                 '67.5': '16.875rem', // 270px
@@ -41,6 +44,12 @@ const config: Config = {
             },
             scale: {
                 '5': '1.05',
+            },
+            gap: {
+                '15': '3.75rem', // 60px
+            },
+            gridTemplateColumns: {
+                mainPageSearch: '3.375rem 1fr',
             },
         },
     },
