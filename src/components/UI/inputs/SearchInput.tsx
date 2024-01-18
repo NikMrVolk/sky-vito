@@ -1,4 +1,4 @@
-import { cn } from '@/lig/className'
+import { cn } from '@/lib/className'
 
 interface SearchInputProps {
     className?: string

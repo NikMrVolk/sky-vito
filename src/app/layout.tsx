@@ -4,7 +4,7 @@ import { Roboto } from 'next/font/google'
 import SearchBar from '@/components/common/SearchBar'
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
-import { cn } from '@/lig/className'
+import { cn } from '@/lib/className'
 
 import './globals.css'
 

@@ -1,4 +1,4 @@
-import { cn } from '@/lig/className'
+import { cn } from '@/lib/className'
 
 interface ButtonProps {
     children?: React.ReactNode

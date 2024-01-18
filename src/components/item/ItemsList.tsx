@@ -1,6 +1,6 @@
 import ItemCard from './ItemCard'
 
-import { cn } from '@/lig/className'
+import { cn } from '@/lib/className'
 import { itemsMock } from '@/utils/mock/items'
 
 interface ItemsListProps {
