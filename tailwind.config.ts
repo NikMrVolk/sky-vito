@@ -19,8 +19,14 @@ const config: Config = {
             colors: {
                 layoutBlue: '#009EE4',
                 layoutBlueHover: '#0080C1',
+                layoutGray: '#5F5F5F',
             },
             spacing: {
+                '13': '3.25rem', // 52px
+                '33': '8.25rem', // 132px
+                '34.25': '8.5625rem', // 137px
+                '67.5': '16.875rem', // 270px
+                '107.5': '26.875rem', // 430px
                 mainLayoutCalc: 'calc(50% - 35rem);',
             },
             borderRadius: {
@@ -28,6 +34,13 @@ const config: Config = {
             },
             boxShadow: {
                 mobileFooter: '0 4px 25px 0px rgba(0, 0, 0, 0.1)',
+                itemCard: '0 4px 14px 0px rgba(0, 0, 0, 0.1)',
+            },
+            fontSize: {
+                '1.5xl': ['22px', '26px'],
+            },
+            scale: {
+                '5': '1.05',
             },
         },
     },

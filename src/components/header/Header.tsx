@@ -1,9 +1,10 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import BlockWrapper from '../common/wrappers/BlockWrapper'
 import Button from '../UI/Button'
-import SearchInput from '../UI/inputes/SearchInput'
-import Link from 'next/link'
+import SearchInput from '../UI/inputs/SearchInput'
+
 import { PROFILE_ROUTE } from '@/utils/constants/routes'
 
 export default function Header() {
