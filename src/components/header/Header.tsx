@@ -9,7 +9,7 @@ import { PROFILE_ROUTE } from '@/utils/constants/routes'
 
 export default function Header() {
     return (
-        <BlockWrapper className="bg-layoutBlue">
+        <BlockWrapper className="mb-7.5 bg-layoutBlue sm:mb-0">
             <header className="flex h-14 items-center justify-between sm:h-20 sm:justify-end">
                 <div className="flex w-full items-center gap-2.5 sm:hidden">
                     <Image

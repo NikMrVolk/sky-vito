@@ -23,6 +23,7 @@ const config: Config = {
             },
             spacing: {
                 '3.25': '0.8125rem', // 13px
+                '7.5': '1.875rem', // 30px
                 '9.25': '2.3125rem', // 37px
                 '13': '3.25rem', // 52px
                 '15': '3.75rem', // 60px
@@ -41,6 +42,8 @@ const config: Config = {
             },
             fontSize: {
                 '1.5xl': ['22px', '26px'],
+                '3.5xl': ['32px', '38px'],
+                '4.5xl': ['40px', '46px'],
             },
             scale: {
                 '5': '1.05',
