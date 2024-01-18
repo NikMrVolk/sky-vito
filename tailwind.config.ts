@@ -20,9 +20,11 @@ const config: Config = {
                 layoutBlue: '#009EE4',
                 layoutBlueHover: '#0080C1',
                 layoutGray: '#5F5F5F',
+                layoutLightGray: '#C4C4C4',
             },
             spacing: {
                 '3.25': '0.8125rem', // 13px
+                '4.25': '1.0625rem', // 17px
                 '4.5': '1.125rem', // 18px
                 '7.5': '1.875rem', // 30px
                 '9.25': '2.3125rem', // 37px
@@ -35,7 +37,7 @@ const config: Config = {
                 mainLayoutCalc: 'calc(50% - 35rem);',
             },
             borderRadius: {
-                mobileSearchInput: '1.875rem', // 30px
+                mobileInput: '1.875rem', // 30px
             },
             boxShadow: {
                 mobileFooter: '0 4px 25px 0px rgba(0, 0, 0, 0.1)',
