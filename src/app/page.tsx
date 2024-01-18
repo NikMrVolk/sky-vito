@@ -7,7 +7,7 @@ export default function Home() {
         <BlockWrapper>
             <h1>work</h1>
             <br />
-            <div className="flex flex-wrap items-start justify-center gap-x-2.5 gap-y-10 ">
+            <div className="flex flex-wrap items-start justify-center gap-x-2.5 gap-y-10 pb-16 sm:pb-0">
                 {itemsMock.map(el => (
                     <ItemCard
                         key={el.id}
