@@ -3,6 +3,8 @@ import Image from 'next/image'
 import BlockWrapper from '../common/wrappers/BlockWrapper'
 import Button from '../UI/Button'
 import SearchInput from '../UI/inputes/SearchInput'
+import Link from 'next/link'
+import { PROFILE_ROUTE } from '@/utils/constants/routes'
 
 export default function Header() {
     return (
@@ -20,7 +22,9 @@ export default function Header() {
                 </div>
                 <div className="hidden gap-2.5 sm:flex">
                     <Button className="border">Разместить объявление</Button>
-                    <Button className="border">Личный кобинет</Button>
+                    <Link href={PROFILE_ROUTE}>
+                        <Button className="border">Личный кобинет</Button>
+                    </Link>
                 </div>
             </header>
         </BlockWrapper>
