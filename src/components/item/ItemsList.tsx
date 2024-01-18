@@ -14,7 +14,7 @@ export default function ItemsList({ title, classes = { wrapper: '', title: '' } 
             <h3 className={cn('mb-5 text-lg font-medium sm:text-3.5xl', classes.title)}>{title}</h3>
             <div
                 className={cn(
-                    'flex flex-wrap items-start justify-center gap-x-2.5 gap-y-10 pb-16',
+                    'flex flex-wrap items-start justify-center gap-x-2.5 gap-y-2.5 pb-20 sm:gap-y-10',
                     classes.wrapper,
                 )}
             >

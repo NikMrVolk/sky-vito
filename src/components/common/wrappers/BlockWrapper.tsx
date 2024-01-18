@@ -6,5 +6,5 @@ interface BlockWrapperProps {
 }
 
 export default function BlockWrapper({ children, className = '' }: BlockWrapperProps) {
-    return <div className={cn('px-5 xl:px-mainLayoutCalc', className)}>{children}</div>
+    return <div className={cn('px-4.5 xl:px-mainLayoutCalc', className)}>{children}</div>
 }
