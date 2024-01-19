@@ -22,6 +22,7 @@ const config: Config = {
                 layoutBlueHover: '#0080C1',
                 layoutGray: '#5F5F5F',
                 layoutLightGray: '#C4C4C4',
+                loginInput: '#D9D9D9',
             },
             spacing: {
                 '2.75': '0.6875rem', // 11px
