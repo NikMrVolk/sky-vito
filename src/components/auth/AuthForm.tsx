@@ -3,24 +3,42 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-
-import LoginInput from '../UI/inputs/LoginInput'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 import AuthFormButtons from './AuthFormButtons'
+import AuthInputs from './AuthInputs'
 
 import { LOGIN_ROUTE, MAIN_ROUTE } from '@/utils/constants/routes'
 
+export interface IAuthFormData {
+    email: string
+    password: string
+    confirmedPassword?: string
+    firstName?: string
+    lastName?: string
+    city?: string
+}
+
 export default function AuthForm() {
     const pathname = usePathname()
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        watch,
+        reset,
+    } = useForm<IAuthFormData>({ mode: 'onChange' })
 
     const isLogin = pathname === LOGIN_ROUTE
+
+    const onSubmit: SubmitHandler<IAuthFormData> = () => {
+        reset()
+    }
 
     return (
         <form
             className="flex w-full flex-col items-center gap-7.5 px-5 xs:max-w-96 xs:rounded-md xs:px-10 xs:py-5 xs:shadow-itemCard"
-            onSubmit={e => {
-                e.preventDefault()
-            }}
+            onSubmit={handleSubmit(onSubmit)}
         >
             <div className="cursor-pointer">
                 <Image
@@ -32,18 +50,7 @@ export default function AuthForm() {
                     quality={100}
                 />
             </div>
-            <div className="flex w-full flex-col gap-3.5">
-                <LoginInput placeholder="Email" />
-                <LoginInput placeholder="Пароль" type="password" />
-                {!isLogin && (
-                    <>
-                        <LoginInput placeholder="Повторите пароль" type="password" />
-                        <LoginInput placeholder="Имя (необязательно)" />
-                        <LoginInput placeholder="Фамилия (необязательно)" />
-                        <LoginInput placeholder="Город (необязательно)" />
-                    </>
-                )}
-            </div>
+            <AuthInputs register={register} errors={errors} isLogin={isLogin} watch={watch} />
             <AuthFormButtons isLogin={isLogin} />
             <div className="-mt-5 self-end">
                 Не хотите войти?{' '}
