@@ -6,7 +6,7 @@ import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import { cn } from '@/lib/className'
 
-import './globals.css'
+import '../globals.css'
 
 const roboto = Roboto({
     weight: ['400', '700'],
