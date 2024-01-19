@@ -1,3 +1,5 @@
+import AuthForm from '@/components/auth/AuthForm'
+
 export default function RegistrationPage() {
-    return <div>RegistrationPage</div>
+    return <AuthForm />
 }
