@@ -43,6 +43,7 @@ export default function AuthInputs({ register, errors, isLogin, watch }: AuthInp
                     },
                     minLength: { value: 8, message: 'Пароль должен быть не меньше 8 символов' },
                 }}
+                classes={{ input: 'pl-4 pr-12 xs:pl-0.5 xs:pr-15' }}
             />
             {!isLogin && (
                 <>
@@ -56,6 +57,7 @@ export default function AuthInputs({ register, errors, isLogin, watch }: AuthInp
                             required: 'Обязательное поле',
                             validate: val => watch('password') === val || 'Пароли должны совпадать',
                         }}
+                        classes={{ input: 'pl-4 pr-12 xs:pl-0.5 xs:pr-15' }}
                     />
                     <LoginInput
                         placeholder="Имя (необязательно)"
