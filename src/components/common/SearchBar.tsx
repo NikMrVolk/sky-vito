@@ -32,7 +32,7 @@ export default function SearchBar() {
                     <Button>Найти</Button>
                 </div>
             ) : (
-                <Link href={MAIN_ROUTE}>
+                <Link href={MAIN_ROUTE} className="max-w-60">
                     <Button className="py-3.25">Вернуться на главную</Button>
                 </Link>
             )}
