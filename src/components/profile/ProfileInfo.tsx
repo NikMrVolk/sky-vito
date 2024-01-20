@@ -1,5 +1,6 @@
-import Button from '../UI/Button'
+import Button from '../UI/buttons/Button'
 import InputWithTitle from '../UI/inputs/InputWithTitle'
+
 import ProfileAvatar from './ProfileAvatar'
 
 export default function ProfileInfo() {

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import Button from '../UI/Button'
+import Button from '../UI/buttons/Button'
 
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '@/utils/constants/routes'
 

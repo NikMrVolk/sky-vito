@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import Button from '../UI/Button'
+import Button from '../UI/buttons/Button'
 import SearchInput from '../UI/inputs/SearchInput'
 
 import BlockWrapper from './wrappers/BlockWrapper'

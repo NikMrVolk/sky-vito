@@ -1,6 +1,6 @@
 import BlockWrapper from '@/components/common/wrappers/BlockWrapper'
 import ItemPhotos from '@/components/item/page/ItemPhotos'
-import Button from '@/components/UI/Button'
+import Button from '@/components/UI/buttons/Button'
 
 interface ItemPageProps {
     params: { slug: string }

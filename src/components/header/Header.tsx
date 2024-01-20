@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import BlockWrapper from '../common/wrappers/BlockWrapper'
-import Button from '../UI/Button'
+import Button from '../UI/buttons/Button'
 import SearchInput from '../UI/inputs/SearchInput'
 
 import { PROFILE_ROUTE } from '@/utils/constants/routes'
