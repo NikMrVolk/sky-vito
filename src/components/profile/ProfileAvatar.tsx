@@ -17,7 +17,10 @@ export default function ProfileAvatar({ isOther, classes }: ProfileAvatarProps) 
                 )}
             />
             {isOther ? (
-                <ButtonWithSellerPhone number={89051023445} />
+                <ButtonWithSellerPhone
+                    number={89051023445}
+                    classes={{ buttonWrapper: classes?.button }}
+                />
             ) : (
                 <div className={cn('cursor-pointer text-layoutBlue', classes?.link)}>Заменить</div>
             )}
