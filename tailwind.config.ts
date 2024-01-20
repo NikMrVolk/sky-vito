@@ -35,6 +35,7 @@ const config: Config = {
                 '9.25': '2.3125rem', // 37px
                 '13': '3.25rem', // 52px
                 '15': '3.75rem', // 60px
+                '22': '5.5rem', // 88px
                 '30': '7.5rem', // 120px
                 '33': '8.25rem', // 132px
                 '34.25': '8.5625rem', // 137px
@@ -43,7 +44,9 @@ const config: Config = {
                 '67.5': '16.875rem', // 270px
                 '75': '18.75rem', // 300px
                 '107.5': '26.875rem', // 430px
+                '120': '30rem', // 480px
                 '153.5': '38.375rem', // 614px
+                '200': '50rem', // 800px
                 mainLayoutCalc: 'calc(50% - 35rem);',
             },
             borderRadius: {
@@ -55,6 +58,7 @@ const config: Config = {
             },
             fontSize: {
                 '1.5xl': ['22px', '26px'],
+                '2.5xl': ['28px', '32px'],
                 '3.5xl': ['32px', '38px'],
                 '4.5xl': ['40px', '46px'],
             },
