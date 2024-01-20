@@ -1,22 +1,33 @@
+'use client'
+
 import Image from 'next/image'
-import Link from 'next/link'
+
+import { cn } from '@/lib/className'
 
 interface BackLinkProps {
-    href: string
     text: string
+    onClick?: () => void
+    classes?: { wrapper?: string; arrow?: string; text?: string }
 }
 
-export default function BackLink({ href, text }: BackLinkProps) {
+export default function BackLink({
+    text,
+    onClick = () => {},
+    classes = { wrapper: '', arrow: '', text: '' },
+}: BackLinkProps) {
     return (
-        <Link href={href} className="flex items-center gap-7.5 sm:hidden">
+        <div
+            className={cn('flex items-center gap-7.5 sm:hidden', classes?.wrapper)}
+            onClick={onClick}
+        >
             <Image
                 src="/images/icons/blackWector.png"
                 alt="back"
                 width={10}
                 height={18}
-                className="h-4.5 w-2.5"
+                className={cn('h-4.5 w-2.5', classes?.arrow)}
             />
-            <span className="text-2xl font-medium">{text}</span>
-        </Link>
+            <span className={cn('text-2xl font-medium', classes?.text)}>{text}</span>
+        </div>
     )
 }
