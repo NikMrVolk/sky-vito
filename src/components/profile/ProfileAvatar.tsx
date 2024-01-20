@@ -1,6 +1,6 @@
-import { cn } from '@/lib/className'
+import ButtonWithSellerPhone from '../UI/buttons/ButtonWithSellerPhone'
 
-import Button from '../UI/Button'
+import { cn } from '@/lib/className'
 
 interface ProfileAvatarProps {
     isOther?: boolean
@@ -17,10 +17,7 @@ export default function ProfileAvatar({ isOther, classes }: ProfileAvatarProps) 
                 )}
             />
             {isOther ? (
-                <Button className={cn('', classes?.button)}>
-                    Показать телефон
-                    <br />8 905 ХХХ ХХ ХХ
-                </Button>
+                <ButtonWithSellerPhone number={89051023445} />
             ) : (
                 <div className={cn('cursor-pointer text-layoutBlue', classes?.link)}>Заменить</div>
             )}
