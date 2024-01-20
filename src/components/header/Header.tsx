@@ -1,13 +1,17 @@
 import Image from 'next/image'
-import Link from 'next/link'
 
 import BlockWrapper from '../common/wrappers/BlockWrapper'
-import Button from '../UI/buttons/Button'
 import SearchInput from '../UI/inputs/SearchInput'
+import Modal from '../UI/modals/Modal'
 
-import { PROFILE_ROUTE } from '@/utils/constants/routes'
+import HeaderButtons from './HeaderButtons'
 
 export default function Header() {
+    async function onClose() {
+        'use server'
+        console.log('Modal has closed')
+    }
+
     return (
         <BlockWrapper className="bg-layoutBlue sm:mb-0">
             <header className="flex h-14 items-center justify-between sm:h-20 sm:justify-end">
@@ -21,13 +25,11 @@ export default function Header() {
                     />
                     <SearchInput placeholder="Поиск" className="w-full rounded-mobileInput" />
                 </div>
-                <div className="hidden gap-2.5 sm:flex">
-                    <Button className="border">Разместить объявление</Button>
-                    <Link href={PROFILE_ROUTE}>
-                        <Button className="border">Личный кобинет</Button>
-                    </Link>
-                </div>
+                <HeaderButtons />
             </header>
+            <Modal onClose={onClose}>
+                <p className="max-w-[400px]">123</p>
+            </Modal>
         </BlockWrapper>
     )
 }
