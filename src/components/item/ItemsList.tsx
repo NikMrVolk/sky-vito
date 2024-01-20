@@ -5,15 +5,15 @@ import { itemsMock } from '@/utils/mock/items'
 
 interface ItemsListProps {
     title: string
-    classes?: { cardWrapper?: string; title?: string }
+    classes?: { blockWrapper?: string; cardWrapper?: string; title?: string }
 }
 
 export default function ItemsList({
     title,
-    classes = { cardWrapper: '', title: '' },
+    classes = { blockWrapper: '', cardWrapper: '', title: '' },
 }: ItemsListProps) {
     return (
-        <>
+        <div className={cn('', classes.blockWrapper)}>
             <h3 className={cn('mb-5 text-lg font-medium sm:text-3.5xl', classes.title)}>{title}</h3>
             <div
                 className={cn(
@@ -32,6 +32,6 @@ export default function ItemsList({
                     />
                 ))}
             </div>
-        </>
+        </div>
     )
 }

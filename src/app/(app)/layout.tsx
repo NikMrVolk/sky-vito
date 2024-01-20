@@ -9,7 +9,7 @@ import { cn } from '@/lib/className'
 import '../globals.css'
 
 const roboto = Roboto({
-    weight: ['400', '700'],
+    weight: ['400', '500', '700'],
     style: ['normal'],
     subsets: ['latin'],
     display: 'swap',
