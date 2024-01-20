@@ -1,6 +1,5 @@
-import Image from 'next/image'
-
 import BlockWrapper from '@/components/common/wrappers/BlockWrapper'
+import ItemPhotos from '@/components/item/page/ItemPhotos'
 import Button from '@/components/UI/Button'
 
 interface ItemPageProps {
@@ -9,26 +8,9 @@ interface ItemPageProps {
 
 export default function ItemPage({ params }: ItemPageProps) {
     return (
-        <BlockWrapper className="flex flex-col gap-7.5">
+        <BlockWrapper className="flex flex-col gap-7.5 overflow-x-hidden sm:overflow-x-visible">
             <div className="flex flex-col gap-7.5 sm:flex-row xl:gap-15">
-                <div className="gap-7.5 sm:flex sm:flex-col">
-                    <div className="relative -mx-4.5 -mb-2.5 h-80 bg-layoutGray/50 sm:mx-0 sm:h-80 sm:w-80 lg:h-120 lg:w-120">
-                        <Image
-                            src="/images/icons/itemVector.png"
-                            alt="back"
-                            width={12}
-                            height={23}
-                            className="absolute left-6 top-5 sm:hidden"
-                        />
-                    </div>
-                    <div className="hidden gap-2.5 sm:flex">
-                        <div className="h-14 w-14 bg-layoutGray/50 lg:h-22 lg:w-22" />
-                        <div className="h-14 w-14 bg-layoutGray/50 lg:h-22 lg:w-22" />
-                        <div className="h-14 w-14 bg-layoutGray/50 lg:h-22 lg:w-22" />
-                        <div className="h-14 w-14 bg-layoutGray/50 lg:h-22 lg:w-22" />
-                        <div className="h-14 w-14 bg-layoutGray/50 lg:h-22 lg:w-22" />
-                    </div>
-                </div>
+                <ItemPhotos />
                 <div className="flex flex-col gap-7.5">
                     <div className="-mb-2.5 flex flex-col gap-2.5">
                         <h4 className="text-lg font-bold leading-6 sm:text-2xl lg:text-3.5xl">

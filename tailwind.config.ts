@@ -72,6 +72,9 @@ const config: Config = {
             gridTemplateColumns: {
                 mainPageSearch: '3.375rem 1fr',
             },
+            zIndex: {
+                '1': '1',
+            },
         },
     },
     plugins: [],
