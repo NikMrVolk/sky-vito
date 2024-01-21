@@ -16,7 +16,7 @@ export default function Modal({
     return (
         <div
             className={cn(
-                `pointer-events-none fixed left-0 top-0 flex h-full min-h-screen w-full items-center justify-center opacity-0 
+                `pointer-events-none fixed left-0 top-0 z-10 flex h-full min-h-screen w-full items-center justify-center opacity-0 
                 duration-500 sm:bg-black/40 ${active ? 'pointer-events-auto opacity-100' : ''}`,
                 classes.wrapper,
             )}
@@ -24,8 +24,8 @@ export default function Modal({
         >
             <div
                 className={cn(
-                    `z-1 h-screen w-full scale-50 gap-5 bg-white px-8 py-8 duration-500 sm:mt-2 
-                    sm:h-auto sm:w-auto sm:min-w-120 sm:rounded-xl ${active ? 'scale-100' : ''}`,
+                    `z-10 h-screen w-full scale-50 gap-5 overflow-y-scroll bg-white px-8 py-8 duration-500 sm:mt-2 
+                    sm:h-auto sm:w-auto sm:rounded-xl ${active ? 'scale-100' : ''}`,
                 )}
                 onClick={e => e.stopPropagation()}
             >

@@ -48,6 +48,7 @@ const config: Config = {
                 '75': '18.75rem', // 300px
                 '107.5': '26.875rem', // 430px
                 '120': '30rem', // 480px
+                '150': '37.5rem', // 600px
                 '153.5': '38.375rem', // 614px
                 '200': '50rem', // 800px
                 mainLayoutCalc: 'calc(50% - 35rem);',

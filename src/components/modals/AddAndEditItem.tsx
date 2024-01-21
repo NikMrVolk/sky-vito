@@ -3,6 +3,7 @@
 import BackLinkWithCross from '../common/BackTextWithCross'
 import Button from '../UI/buttons/Button'
 import InputWithTitle from '../UI/inputs/InputWithTitle'
+import TextArea from '../UI/inputs/TextArea'
 
 interface AddAndEditItemProps {
     setActive: (v: boolean) => void
@@ -28,11 +29,7 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
                 placeholder="Описание..."
                 classes={{ title: 'text-black' }}
             >
-                <textarea
-                    className="min-h-27 resize-none rounded-5 border border-black/20 px-4.25 py-2.5 
-                    text-sm focus:border-layoutBlue focus:outline-none sm:rounded-md sm:text-base"
-                    placeholder="Самый..."
-                />
+                <TextArea placeholder="Самый..." />
             </InputWithTitle>
             <InputWithTitle
                 title="Описание товара"
