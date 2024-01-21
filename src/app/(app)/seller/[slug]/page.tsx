@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import BackLink from '@/components/common/BackLink'
+import BackLink from '@/components/common/BackTextWithCross'
 import BlockWrapper from '@/components/common/wrappers/BlockWrapper'
 import ItemsList from '@/components/item/ItemsList'
 import ProfileAvatar from '@/components/profile/ProfileAvatar'
