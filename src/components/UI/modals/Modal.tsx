@@ -16,17 +16,16 @@ export default function Modal({
     return (
         <div
             className={cn(
-                `pointer-events-none fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black/40 opacity-0 duration-500
-                ${active ? 'pointer-events-auto opacity-100' : ''}`,
+                `pointer-events-none fixed left-0 top-0 flex h-full min-h-screen w-full items-center justify-center opacity-0 
+                duration-500 sm:bg-black/40 ${active ? 'pointer-events-auto opacity-100' : ''}`,
                 classes.wrapper,
             )}
-            onClick={() => {
-                setActive(false)
-            }}
+            onClick={() => setActive(false)}
         >
             <div
                 className={cn(
-                    `scale-50 rounded-xl bg-white px-10 duration-500 ${active ? 'scale-100' : ''}`,
+                    `z-1 flex h-screen w-full scale-50 flex-col gap-5 bg-white px-8 py-8 duration-500 sm:mt-2 
+                    sm:h-auto sm:w-auto sm:min-w-120 sm:rounded-xl ${active ? 'scale-100' : ''}`,
                 )}
                 onClick={e => e.stopPropagation()}
             >
