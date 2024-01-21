@@ -37,6 +37,8 @@ const config: Config = {
                 '13': '3.25rem', // 52px
                 '15': '3.75rem', // 60px
                 '22': '5.5rem', // 88px
+                '22.5': '5.625rem', // 90px
+                '27': '6.75rem', // 108px
                 '30': '7.5rem', // 120px
                 '33': '8.25rem', // 132px
                 '34.25': '8.5625rem', // 137px
@@ -51,6 +53,7 @@ const config: Config = {
                 mainLayoutCalc: 'calc(50% - 35rem);',
             },
             borderRadius: {
+                '5': '1.25rem', // 20px
                 mobileInput: '1.875rem', // 30px
             },
             boxShadow: {

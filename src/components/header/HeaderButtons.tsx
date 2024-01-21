@@ -8,6 +8,7 @@ import Button from '../UI/buttons/Button'
 import Modal from '../UI/modals/Modal'
 
 import { PROFILE_ROUTE } from '@/utils/constants/routes'
+import AddAndEditItem from '../modals/AddAndEditItem'
 
 export default function HeaderButtons() {
     const [active, setActive] = useState<boolean>(false)
@@ -22,7 +23,7 @@ export default function HeaderButtons() {
                 Личный кобинет
             </Button>
             <Modal active={active} setActive={setActive}>
-                Add new
+                <AddAndEditItem setActive={setActive} />
             </Modal>
         </div>
     )

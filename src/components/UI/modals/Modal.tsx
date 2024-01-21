@@ -24,7 +24,7 @@ export default function Modal({
         >
             <div
                 className={cn(
-                    `z-1 flex h-screen w-full scale-50 flex-col gap-5 bg-white px-8 py-8 duration-500 sm:mt-2 
+                    `z-1 h-screen w-full scale-50 gap-5 bg-white px-8 py-8 duration-500 sm:mt-2 
                     sm:h-auto sm:w-auto sm:min-w-120 sm:rounded-xl ${active ? 'scale-100' : ''}`,
                 )}
                 onClick={e => e.stopPropagation()}

@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import Image from 'next/image'
 
-import BackLinkWithCross from '../common/BackTextWithCross'
+import AddAndEditItem from '../modals/AddAndEditItem'
 import Modal from '../UI/modals/Modal'
 
 export default function AddItemFooter() {
@@ -20,8 +20,7 @@ export default function AddItemFooter() {
                 onClick={() => setActive(true)}
             />
             <Modal active={active} setActive={setActive}>
-                <BackLinkWithCross text="Редактировать" onTextClick={() => setActive(false)} />
-                Add new
+                <AddAndEditItem setActive={setActive} />
             </Modal>
         </>
     )

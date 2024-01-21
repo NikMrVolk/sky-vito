@@ -2,24 +2,33 @@
 
 import Image from 'next/image'
 
+import useScreenSize from '@/hooks/common/useScreenSize'
 import { cn } from '@/lib/className'
 
 interface BackLinkWithCrossProps {
     text: string
-    onCrossClick?: () => void
-    onTextClick?: () => void
+    // todo change ? => to use always
+    onClick?: () => void
     classes?: { wrapper?: string; arrow?: string; text?: string; cross?: string }
 }
 
+const keySizeValue: number = 640
+
 export default function BackLinkWithCross({
     text,
-    onCrossClick = () => {},
-    onTextClick = () => {},
+    onClick = () => {},
     classes = { wrapper: '', arrow: '', text: '', cross: '' },
 }: BackLinkWithCrossProps) {
+    const { width } = useScreenSize()
+
     return (
         <div className={cn('flex items-center justify-between sm:hidden', classes?.wrapper)}>
-            <div className="flex items-center gap-7.5" onClick={onTextClick}>
+            <div
+                className="flex items-center gap-7.5"
+                onClick={() => {
+                    if (width < keySizeValue) onClick()
+                }}
+            >
                 <Image
                     src="/images/icons/blackWector.png"
                     alt="back"
@@ -34,8 +43,10 @@ export default function BackLinkWithCross({
                 alt="cross"
                 width={30}
                 height={30}
-                onClick={onCrossClick}
                 className={cn('hidden sm:block', classes.cross)}
+                onClick={() => {
+                    if (width >= keySizeValue) onClick()
+                }}
             />
         </div>
     )
