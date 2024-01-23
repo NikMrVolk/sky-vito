@@ -1,4 +1,4 @@
-interface ImageType {
+export interface ImageType {
     id: number
     ad_id: number
     url: string
@@ -12,6 +12,13 @@ interface UserType {
     name: string
     phone: string
     sells_from: string
+}
+
+export interface IComments {
+    id: number
+    created_on: string
+    author: UserType
+    text: string
 }
 
 export interface ItemType {

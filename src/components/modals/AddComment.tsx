@@ -5,13 +5,14 @@ import Button from '../UI/buttons/Button'
 import InputWithTitle from '../UI/inputs/InputWithTitle'
 import TextArea from '../UI/inputs/TextArea'
 
+import { IComments } from '@/services/items/items.types'
 interface AddCommentProps {
     setActive: (v: boolean) => void
+    comments: IComments[]
 }
 
-const ss = ['1', '1', '1', '1', '1']
-
-export default function AddComment({ setActive }: AddCommentProps) {
+export default function AddComment({ setActive, comments }: AddCommentProps) {
+    console.log(comments)
     return (
         <div className="flex max-w-150 flex-col gap-7.5 overflow-y-scroll sm:max-w-120">
             <BackLinkWithCross
@@ -28,20 +29,16 @@ export default function AddComment({ setActive }: AddCommentProps) {
             </InputWithTitle>
             <Button>Опубликовать</Button>
             <div className="flex flex-col gap-7.5 sm:max-h-75">
-                {ss.map(el => (
-                    <div key={el} className="flex gap-3">
+                {comments?.map(el => (
+                    <div key={el.id} className="flex gap-3">
                         <div className="h-10 w-10 rounded-full bg-layoutGray/50 px-5" />
                         <div className="flex flex-col gap-3">
                             <div className="flex gap-2.5">
-                                <div>Олег</div>
-                                <div>14 августа</div>
+                                <div>{el.author.name}</div>
+                                <div>{el.created_on}</div>
                             </div>
                             <div>
-                                Комментарий
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                </p>
+                                <p>{el.text}</p>
                             </div>
                         </div>
                     </div>
