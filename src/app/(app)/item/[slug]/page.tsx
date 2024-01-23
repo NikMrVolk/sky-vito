@@ -2,6 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query'
 
+import IsAuthComponent from '@/components/common/IsAuthComponent'
 import BlockWrapper from '@/components/common/wrappers/BlockWrapper'
 import ItemBaseInfo from '@/components/item/page/ItemBaseInfo'
 import ItemPhotos from '@/components/item/page/ItemPhotos'
@@ -24,6 +25,7 @@ export default function ItemPage({ params }: { params: { slug: string } }) {
 
     return (
         <BlockWrapper className="flex flex-col gap-7.5 overflow-x-hidden sm:overflow-x-visible">
+            <IsAuthComponent />
             <div className="flex flex-col gap-7.5 sm:flex-row xl:gap-15">
                 <ItemPhotos images={data?.data.images} />
                 <div className="flex flex-col gap-7.5">

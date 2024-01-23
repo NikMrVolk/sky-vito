@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import BackLink from '@/components/common/BackTextWithCross'
+import IsAuthComponent from '@/components/common/IsAuthComponent'
 import BlockWrapper from '@/components/common/wrappers/BlockWrapper'
 import ItemsList from '@/components/item/ItemsList'
 import ProfileAvatar from '@/components/profile/ProfileAvatar'
@@ -14,6 +15,7 @@ interface pageProps {
 export default function page({ params }: pageProps) {
     return (
         <BlockWrapper className="mt-7.5 flex flex-col gap-7.5">
+            <IsAuthComponent />
             <h5 className="hidden text-4.5xl sm:block">Профиль продавца</h5>
             <Link href={MAIN_ROUTE}>
                 <BackLink text="Профиль продавца" />
