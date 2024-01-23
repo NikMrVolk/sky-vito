@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
 
@@ -20,12 +20,14 @@ export interface FormDataType {
     title: string
     description: string
     price: number
+    files?: File[]
 }
 
 const ss = ['1', '1', '1', '1', '1']
 
 export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
     const [value, setValue] = useState<FormDataType>({ title: '', description: '', price: 0 })
+    const [files, setFiles] = useState<File[] | null>(null)
 
     const { refetch } = useQuery({
         queryKey: [QueryKeys.GET_ADS],
@@ -33,7 +35,7 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
         enabled: false,
     })
 
-    const { mutate: addWithoutImg, isPending: isLoginPending } = useMutation({
+    const { mutate: addWithoutImg, isPending: isAddWithoutPending } = useMutation({
         mutationKey: [QueryKeys.ADD_ITEM_WITHOUT_IMGS],
         mutationFn: (data: FormDataType) => itemsService.addItemWithoutImage(data),
         onSuccess: () => {
@@ -43,8 +45,26 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
         },
     })
 
+    const { mutate: addWithImg, isPending: isAddWithPending } = useMutation({
+        mutationKey: [QueryKeys.ADD_ITEM_WITH_IMGS],
+        mutationFn: (data: FormDataType) => itemsService.addItemWithImage(data),
+        onSuccess: () => {
+            setValue({ title: '', description: '', price: 0 })
+            setFiles(null)
+            setActive(false)
+            refetch()
+        },
+    })
+
+    const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
+        const values = e.currentTarget.files
+        if (values) {
+            // setFiles(values)
+        }
+    }
+
     const handleAddItem = () => {
-        addWithoutImg(value)
+        files ? addWithImg({ ...value, files }) : addWithoutImg(value)
     }
 
     return (
@@ -90,7 +110,13 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
                             key={el}
                             className="flex h-22.5 w-22.5 items-center justify-center bg-gray-400"
                         >
-                            <input type="file" accept="image/*" className="hidden" multiple />
+                            <input
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
+                                multiple
+                                onChange={handleChangeFile}
+                            />
                             <div className="px-11">+</div>
                         </label>
                     ))}
@@ -109,7 +135,7 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
                 </div>
             </InputWithTitle>
             <Button onClick={handleAddItem}>
-                {isLoginPending ? 'Загрузка...' : 'Опубликовать'}
+                {isAddWithPending && isAddWithoutPending ? 'Загрузка...' : 'Опубликовать'}
             </Button>
         </div>
     )

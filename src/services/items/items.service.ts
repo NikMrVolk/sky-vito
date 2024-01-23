@@ -16,6 +16,12 @@ export const itemsService = {
         return response
     },
 
+    async addItemWithImage(data: FormDataType) {
+        const response = await instance.post<ItemType>(`/ads`, data)
+
+        return response
+    },
+
     async addItemWithoutImage(data: FormDataType) {
         const response = await instance.post<ItemType>(`/adstext`, data)
 
