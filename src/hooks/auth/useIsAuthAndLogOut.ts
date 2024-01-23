@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { redirect, useRouter } from 'next/navigation'
 
 import { LOGIN_ROUTE } from '@/utils/constants/routes'
+import { removeFromStorage } from '@/services/auth/auth.helpers'
 
 export const useIsAuthAndLogOut = (): {
     isAuth: boolean
@@ -19,6 +20,7 @@ export const useIsAuthAndLogOut = (): {
     }, [])
 
     const logOut = () => {
+        removeFromStorage()
         localStorage.removeItem('tokens')
         router.push(LOGIN_ROUTE)
     }

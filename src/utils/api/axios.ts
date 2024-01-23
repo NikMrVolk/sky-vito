@@ -1,10 +1,13 @@
+/* eslint-disable complexity */
 import axios, { CreateAxiosDefaults } from 'axios'
-
-import { API_URL } from '../constants/routes'
 
 import { getContentType } from './api.helpers'
 
-export const axiosOptions: CreateAxiosDefaults = {
+import { authService } from '@/services/auth/auth.service'
+import { API_URL } from '../constants/routes'
+import { getAccessToken, getRefreshToken, removeFromStorage } from '@/services/auth/auth.helpers'
+
+const axiosOptions: CreateAxiosDefaults = {
     // baseURL: process.env.API_URL,
     baseURL: API_URL,
     headers: getContentType(),
@@ -12,3 +15,30 @@ export const axiosOptions: CreateAxiosDefaults = {
 }
 
 export const axiosClassic = axios.create(axiosOptions)
+
+export const instance = axios.create(axiosOptions)
+
+instance.interceptors.request.use(config => {
+    const accessToken = getAccessToken()
+
+    if (config?.headers && accessToken) config.headers.Authorization = `Bearer ${accessToken}`
+
+    return config
+})
+
+instance.interceptors.response.use(
+    config => config,
+    async error => {
+        const originalRequest = error.config
+
+        const access_token = getAccessToken()
+        const refresh_token = getRefreshToken()
+
+        try {
+            await authService.getNewTokens({ access_token, refresh_token })
+            return instance.request(originalRequest)
+        } catch (e) {
+            if (e) removeFromStorage()
+        }
+    },
+)

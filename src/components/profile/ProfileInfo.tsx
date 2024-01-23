@@ -1,9 +1,23 @@
+'use client'
+
+import { useQuery } from '@tanstack/react-query'
+
 import Button from '../UI/buttons/Button'
 import InputWithTitle from '../UI/inputs/InputWithTitle'
 
 import ProfileAvatar from './ProfileAvatar'
 
+import { userService } from '@/services/user/user.service'
+import { QueryKeys } from '@/utils/constants/reactQuery'
+
 export default function ProfileInfo() {
+    const { data } = useQuery({
+        queryKey: [QueryKeys.GET_CURRENT_USER],
+        queryFn: () => userService.getCurrent(),
+    })
+
+    console.log('user: ', data)
+
     return (
         <section className="mb-10 mt-7.5 flex flex-col gap-7.5">
             <div className="text-lg sm:text-3.5xl">Настройки профиля</div>

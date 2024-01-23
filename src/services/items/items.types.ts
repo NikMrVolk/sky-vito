@@ -4,7 +4,7 @@ export interface ImageType {
     url: string
 }
 
-interface UserType {
+interface SellerType {
     avatar: string
     city: string
     email: string
@@ -17,7 +17,7 @@ interface UserType {
 export interface IComments {
     id: number
     created_on: string
-    author: UserType
+    author: SellerType
     text: string
 }
 
@@ -29,5 +29,5 @@ export interface ItemType {
     created_on: string
     user_id: number
     images: ImageType[] | []
-    user: UserType
+    user: SellerType
 }
