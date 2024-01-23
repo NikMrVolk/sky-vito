@@ -62,13 +62,13 @@ export default function AuthInputs({ register, errors, isLogin, watch }: AuthInp
                     <LoginInput
                         placeholder="Имя (необязательно)"
                         register={register}
-                        registerName="firstName"
+                        registerName="name"
                         errors={errors}
                     />
                     <LoginInput
                         placeholder="Фамилия (необязательно)"
                         register={register}
-                        registerName="lastName"
+                        registerName="surname"
                         errors={errors}
                     />
                     <LoginInput

@@ -8,14 +8,18 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import AuthFormButtons from './AuthFormButtons'
 import AuthInputs from './AuthInputs'
 
+import { useAuth } from '@/hooks/auth/useAuth'
 import { LOGIN_ROUTE, MAIN_ROUTE } from '@/utils/constants/routes'
 
 export interface IAuthFormData {
+    id?: number
     email: string
     password: string
     confirmedPassword?: string
-    firstName?: string
-    lastName?: string
+    name?: string
+    surname?: string
+    role?: 'admin' | 'user'
+    phone?: number
     city?: string
 }
 
@@ -26,13 +30,12 @@ export default function AuthForm() {
         handleSubmit,
         formState: { errors },
         watch,
-        reset,
     } = useForm<IAuthFormData>({ mode: 'onChange' })
-
+    const { login, registration } = useAuth()
     const isLogin = pathname === LOGIN_ROUTE
 
-    const onSubmit: SubmitHandler<IAuthFormData> = () => {
-        reset()
+    const onSubmit: SubmitHandler<IAuthFormData> = data => {
+        isLogin ? login(data) : registration(data)
     }
 
     return (

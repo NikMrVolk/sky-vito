@@ -5,6 +5,7 @@ import SearchBar from '@/components/common/SearchBar'
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import { cn } from '@/lib/className'
+import { Providers } from '@/lib/Providers'
 
 import '../globals.css'
 
@@ -22,16 +23,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
-            <body className={cn('flex h-screen flex-col justify-between', roboto.className)}>
-                <div>
-                    <Header />
-                    <SearchBar />
-                </div>
+        <Providers>
+            <html lang="en">
+                <body className={cn('flex h-screen flex-col justify-between', roboto.className)}>
+                    <div>
+                        <Header />
+                        <SearchBar />
+                    </div>
 
-                <main className="h-full">{children}</main>
-                <Footer />
-            </body>
-        </html>
+                    <main className="h-full">{children}</main>
+                    <Footer />
+                </body>
+            </html>
+        </Providers>
     )
 }
