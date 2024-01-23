@@ -1,6 +1,7 @@
 import { IComments, ItemType } from './items.types'
 
-import { axiosClassic } from '@/utils/api/axios'
+import { FormDataType } from '@/components/modals/AddAndEditItem'
+import { axiosClassic, instance } from '@/utils/api/axios'
 
 export const itemsService = {
     async getAll() {
@@ -11,6 +12,12 @@ export const itemsService = {
 
     async getOne(slug: string) {
         const response = await axiosClassic.get<ItemType>(`/ads/${slug}`)
+
+        return response
+    },
+
+    async addItemWithoutImage(data: FormDataType) {
+        const response = await instance.post<ItemType>(`/adstext`, data)
 
         return response
     },

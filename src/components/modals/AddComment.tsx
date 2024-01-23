@@ -3,7 +3,7 @@
 import BackLinkWithCross from '../common/BackTextWithCross'
 import Button from '../UI/buttons/Button'
 import InputWithTitle from '../UI/inputs/InputWithTitle'
-import TextArea from '../UI/inputs/TextArea'
+// import TextArea from '../UI/inputs/TextArea'
 
 import { IComments } from '@/services/items/items.types'
 interface AddCommentProps {
@@ -25,7 +25,7 @@ export default function AddComment({ setActive, comments }: AddCommentProps) {
                 placeholder="Описание..."
                 classes={{ title: 'text-black' }}
             >
-                <TextArea placeholder="Ваш комментарий" />
+                {/* <TextArea placeholder="Ваш комментарий" /> */}
             </InputWithTitle>
             <Button>Опубликовать</Button>
             <div className="flex flex-col gap-7.5 sm:max-h-75">

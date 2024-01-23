@@ -19,13 +19,15 @@ export default function ProfileAvatar({ isOther, classes, imgSrc = '' }: Profile
                     classes?.photo,
                 )}
             >
-                <Image
-                    src={`${API_URL + imgSrc}`}
-                    alt="photo"
-                    width={100}
-                    height={100}
-                    className="h-full w-full"
-                />
+                {imgSrc && (
+                    <Image
+                        src={`${API_URL + imgSrc}`}
+                        alt="photo"
+                        width={100}
+                        height={100}
+                        className="h-full w-full"
+                    />
+                )}
             </div>
             {isOther ? (
                 <ButtonWithSellerPhone

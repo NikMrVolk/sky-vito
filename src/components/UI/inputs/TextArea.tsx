@@ -1,11 +1,14 @@
+import { FormDataType } from '@/components/modals/AddAndEditItem'
 import { cn } from '@/lib/className'
 
 interface TextAreaProps {
     placeholder: string
     className?: string
+    value: FormDataType
+    setValue: (v: FormDataType) => void
 }
 
-export default function TextArea({ placeholder, className = '' }: TextAreaProps) {
+export default function TextArea({ placeholder, className = '', value, setValue }: TextAreaProps) {
     return (
         <textarea
             className={cn(
@@ -14,6 +17,8 @@ export default function TextArea({ placeholder, className = '' }: TextAreaProps)
                 className,
             )}
             placeholder={placeholder}
+            value={value.description}
+            onChange={e => setValue({ ...value, description: e.target.value })}
         />
     )
 }

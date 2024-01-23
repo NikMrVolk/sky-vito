@@ -1,17 +1,52 @@
 'use client'
 
+import { useState } from 'react'
+
+import { useMutation, useQuery } from '@tanstack/react-query'
+
 import BackLinkWithCross from '../common/BackTextWithCross'
 import Button from '../UI/buttons/Button'
 import InputWithTitle from '../UI/inputs/InputWithTitle'
 import TextArea from '../UI/inputs/TextArea'
 
+import { itemsService } from '@/services/items/items.service'
+import { QueryKeys } from '@/utils/constants/reactQuery'
+
 interface AddAndEditItemProps {
     setActive: (v: boolean) => void
+}
+
+export interface FormDataType {
+    title: string
+    description: string
+    price: number
 }
 
 const ss = ['1', '1', '1', '1', '1']
 
 export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
+    const [value, setValue] = useState<FormDataType>({ title: '', description: '', price: 0 })
+
+    const { refetch } = useQuery({
+        queryKey: [QueryKeys.GET_ADS],
+        queryFn: itemsService.getAll,
+        enabled: false,
+    })
+
+    const { mutate: addWithoutImg, isPending: isLoginPending } = useMutation({
+        mutationKey: [QueryKeys.ADD_ITEM_WITHOUT_IMGS],
+        mutationFn: (data: FormDataType) => itemsService.addItemWithoutImage(data),
+        onSuccess: () => {
+            setValue({ title: '', description: '', price: 0 })
+            setActive(false)
+            refetch()
+        },
+    })
+
+    const handleAddItem = () => {
+        addWithoutImg(value)
+    }
+
     return (
         <div className="flex flex-col gap-7.5">
             <BackLinkWithCross
@@ -23,13 +58,22 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
                 title="Название"
                 placeholder="Я хочу продать..."
                 classes={{ title: 'text-black' }}
-            />
+            >
+                <input
+                    type="text"
+                    className="w-full rounded-5 border border-black/20 py-2.5 pl-4.25 pr-10 
+                    text-sm focus:border-layoutBlue focus:outline-none sm:rounded-md sm:text-base"
+                    placeholder="Я хочу продать..."
+                    value={value.title}
+                    onChange={e => setValue({ ...value, title: e.target.value })}
+                />
+            </InputWithTitle>
             <InputWithTitle
                 title="Описание"
                 placeholder="Описание..."
                 classes={{ title: 'text-black' }}
             >
-                <TextArea placeholder="Самый..." />
+                <TextArea placeholder="Самый..." value={value} setValue={setValue} />
             </InputWithTitle>
             <InputWithTitle
                 title="Описание товара"
@@ -58,11 +102,15 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
                         type="number"
                         className="w-full rounded-5 border border-black/20 py-2.5 pl-4.25 pr-10 
                     text-sm focus:border-layoutBlue focus:outline-none sm:rounded-md sm:text-base"
+                        value={value.price}
+                        onChange={e => setValue({ ...value, price: +e.target.value })}
                     />
                     <span className="absolute bottom-1/3 right-4 text-base leading-4">₽</span>
                 </div>
             </InputWithTitle>
-            <Button>Опубликовать</Button>
+            <Button onClick={handleAddItem}>
+                {isLoginPending ? 'Загрузка...' : 'Опубликовать'}
+            </Button>
         </div>
     )
 }
