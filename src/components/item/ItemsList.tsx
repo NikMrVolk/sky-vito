@@ -1,15 +1,17 @@
 import ItemCard from './ItemCard'
 
 import { cn } from '@/lib/className'
-import { itemsMock } from '@/utils/mock/items'
+import { ItemType } from '@/services/items/items.types'
 
 interface ItemsListProps {
     title: string
+    items?: ItemType[]
     classes?: { blockWrapper?: string; cardWrapper?: string; title?: string }
 }
 
 export default function ItemsList({
     title,
+    items,
     classes = { blockWrapper: '', cardWrapper: '', title: '' },
 }: ItemsListProps) {
     return (
@@ -21,16 +23,21 @@ export default function ItemsList({
                     classes.cardWrapper,
                 )}
             >
-                {itemsMock.map(el => (
-                    <ItemCard
-                        key={el.id}
-                        id={el.id.toString()}
-                        imgLink={el.imgLink}
-                        itemName={el.name}
-                        created={el.created}
-                        city={el.city}
-                    />
-                ))}
+                {items?.length ? (
+                    items.map(el => (
+                        <ItemCard
+                            key={el.id}
+                            id={el.id.toString()}
+                            imgLink={el.images[0]?.url ?? ''}
+                            itemName={el.title}
+                            created={el.created_on}
+                            city={el.user.city}
+                            price={el.price}
+                        />
+                    ))
+                ) : (
+                    <>Список пуст</>
+                )}
             </div>
         </div>
     )

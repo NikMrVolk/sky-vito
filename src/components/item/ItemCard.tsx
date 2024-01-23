@@ -1,9 +1,10 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 
 import useScreenSize from '@/hooks/common/useScreenSize'
-import { ITEM_ROUTE } from '@/utils/constants/routes'
+import { API_URL, ITEM_ROUTE } from '@/utils/constants/routes'
 import { cuttingItemNameInCard } from '@/utils/formatting/cuttingItemNameInCard'
 
 interface ItemCardProps {
@@ -11,10 +12,11 @@ interface ItemCardProps {
     imgLink: string
     itemName: string
     city: string
-    created: number
+    created: string
+    price: number
 }
 
-export default function ItemCard({ id, imgLink, itemName, city, created }: ItemCardProps) {
+export default function ItemCard({ id, imgLink, itemName, city, created, price }: ItemCardProps) {
     const { width } = useScreenSize()
 
     return (
@@ -23,16 +25,25 @@ export default function ItemCard({ id, imgLink, itemName, city, created }: ItemC
                 className="flex w-34.25 cursor-pointer flex-col gap-2.5 rounded-md pb-5 shadow-itemCard 
             duration-500 hover:scale-5 sm:h-107.5 sm:w-67.5 sm:pb-0"
             >
-                <div
-                    style={{ backgroundImage: `url("${imgLink}")` }}
-                    className="min-h-33 rounded-t-md bg-gray-300 bg-cover bg-center bg-no-repeat sm:h-67.5"
-                />
+                <div className="min-h-33 rounded-t-md bg-gray-300 bg-cover bg-center bg-no-repeat sm:h-67.5">
+                    {imgLink ? (
+                        <Image
+                            src={`${API_URL + imgLink}`}
+                            alt="photo"
+                            width={100}
+                            height={100}
+                            className="h-full w-full"
+                        />
+                    ) : (
+                        <></>
+                    )}
+                </div>
 
                 <div className="flex flex-col gap-2.5 px-2.5">
                     <h2 className="h-13 text-sm tracking-tight text-layoutBlue sm:text-1.5xl">
                         {cuttingItemNameInCard(itemName, width)}
                     </h2>
-                    <div className="font-bold sm:text-1.5xl">2 200 ₽</div>
+                    <div className="font-bold sm:text-1.5xl">{price} ₽</div>
                     <div className="flex flex-col gap-1 text-sm text-layoutGray sm:text-base">
                         <div>{city}</div>
                         <div>{created}</div>

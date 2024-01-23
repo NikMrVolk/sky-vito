@@ -1,10 +1,12 @@
 import axios, { CreateAxiosDefaults } from 'axios'
 
+import { API_URL } from '../constants/routes'
+
 import { getContentType } from './api.helpers'
 
 export const axiosOptions: CreateAxiosDefaults = {
     // baseURL: process.env.API_URL,
-    baseURL: 'http://localhost:8090/',
+    baseURL: API_URL,
     headers: getContentType(),
     withCredentials: true,
 }
