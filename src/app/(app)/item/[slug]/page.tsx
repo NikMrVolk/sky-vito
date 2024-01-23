@@ -1,6 +1,8 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
+import Image from 'next/image'
+import Link from 'next/link'
 
 import IsAuthComponent from '@/components/common/IsAuthComponent'
 import BlockWrapper from '@/components/common/wrappers/BlockWrapper'
@@ -9,6 +11,7 @@ import ItemPhotos from '@/components/item/page/ItemPhotos'
 import Button from '@/components/UI/buttons/Button'
 import { itemsService } from '@/services/items/items.service'
 import { QueryKeys } from '@/utils/constants/reactQuery'
+import { API_URL, SELLER_ROUTE } from '@/utils/constants/routes'
 
 export default function ItemPage({ params }: { params: { slug: string } }) {
     const { data, isLoading } = useQuery({
@@ -42,15 +45,27 @@ export default function ItemPage({ params }: { params: { slug: string } }) {
                         <Button className="w-full lg:w-auto">Редактировать</Button>
                         <Button className="w-full lg:w-auto">Снять с публикации</Button>
                     </div>
-                    <div className="flex gap-3">
-                        <div className="h-10 w-10 rounded-full bg-layoutGray/30" />
-                        <div>
-                            <div className="text-lg text-layoutBlue lg:text-lg">Антон</div>
-                            <div className="text-sm text-layoutGray lg:text-base">
-                                Продаёт товары с {data?.data.user.sells_from}
+                    <Link href={SELLER_ROUTE + `/${data?.data.user.id}`}>
+                        <div className="flex gap-3">
+                            <div className="h-10 w-10 rounded-full bg-layoutGray/30">
+                                <Image
+                                    src={`${API_URL + data?.data.user.avatar}`}
+                                    alt="photo"
+                                    width={100}
+                                    height={100}
+                                    className="h-full w-full"
+                                />
+                            </div>
+                            <div>
+                                <div className="text-lg text-layoutBlue lg:text-lg">
+                                    {data?.data.user.name}
+                                </div>
+                                <div className="text-sm text-layoutGray lg:text-base">
+                                    Продаёт товары с {data?.data.user.sells_from}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
             <div className="mb-20 flex flex-col gap-3.5 sm:mb-15">

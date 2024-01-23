@@ -12,7 +12,7 @@ interface AddCommentProps {
 }
 
 export default function AddComment({ setActive, comments }: AddCommentProps) {
-    console.log(comments)
+    // console.log(comments)
     return (
         <div className="flex max-w-150 flex-col gap-7.5 overflow-y-scroll sm:max-w-120">
             <BackLinkWithCross
