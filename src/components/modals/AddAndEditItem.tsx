@@ -1,11 +1,12 @@
 'use client'
 
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
 
 import BackLinkWithCross from '../common/BackTextWithCross'
 import Button from '../UI/buttons/Button'
+import FileInput from '../UI/inputs/FileInput'
 import InputWithTitle from '../UI/inputs/InputWithTitle'
 import TextArea from '../UI/inputs/TextArea'
 
@@ -20,14 +21,12 @@ export interface FormDataType {
     title: string
     description: string
     price: number
-    files?: File[]
+    files?: FileList
 }
-
-const ss = ['1', '1', '1', '1', '1']
 
 export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
     const [value, setValue] = useState<FormDataType>({ title: '', description: '', price: 0 })
-    const [files, setFiles] = useState<File[] | null>(null)
+    const [files, setFiles] = useState<FileList | null>(null)
 
     const { refetch } = useQuery({
         queryKey: [QueryKeys.GET_ADS],
@@ -56,14 +55,8 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
         },
     })
 
-    const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
-        const values = e.currentTarget.files
-        if (values) {
-            // setFiles(values)
-        }
-    }
-
     const handleAddItem = () => {
+        console.log({ ...value, files })
         files ? addWithImg({ ...value, files }) : addWithoutImg(value)
     }
 
@@ -95,33 +88,7 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
             >
                 <TextArea placeholder="Самый..." value={value} setValue={setValue} />
             </InputWithTitle>
-            <InputWithTitle
-                title="Описание товара"
-                description="не более 5 фотографий"
-                placeholder=""
-                classes={{
-                    title: 'text-black flex gap-0 flex-col',
-                    description: 'text-layoutLightGray',
-                }}
-            >
-                <div className="flex gap-2.5 overflow-x-scroll pb-2 sm:overflow-x-hidden">
-                    {ss.map(el => (
-                        <label
-                            key={el}
-                            className="flex h-22.5 w-22.5 items-center justify-center bg-gray-400"
-                        >
-                            <input
-                                type="file"
-                                accept="image/*"
-                                className="hidden"
-                                multiple
-                                onChange={handleChangeFile}
-                            />
-                            <div className="px-11">+</div>
-                        </label>
-                    ))}
-                </div>
-            </InputWithTitle>
+            <FileInput title="Фотографии товара" description="не более 5 фотографий" />
             <InputWithTitle title="Цена" placeholder="" classes={{ wrapper: '-mt-2' }}>
                 <div className="relative">
                     <input
