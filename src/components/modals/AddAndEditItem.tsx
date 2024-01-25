@@ -74,12 +74,9 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
             <InputWrapper title="Описание">
                 <TextArea placeholder="Самый..." value={value} setValue={setValue} />
             </InputWrapper>
-            <FileInput
-                title="Фотографии товара"
-                description="не более 5 фотографий"
-                files={files}
-                onChange={handleChangeFiles}
-            />
+            <InputWrapper title="Фотографии товара" description="не более 5 фотографий">
+                <FileInput files={files} onChange={handleChangeFiles} />
+            </InputWrapper>
             <InputWrapper>
                 <div className="relative">
                     <Input

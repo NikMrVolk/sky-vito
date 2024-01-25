@@ -5,11 +5,7 @@ import { ChangeEvent } from 'react'
 import { MinusCircle } from 'lucide-react'
 import Image from 'next/image'
 
-import { cn } from '@/lib/className'
-
 interface FileInputProps {
-    title: string
-    description: string
     classes?: { wrapper?: string; title?: string; description?: string; label?: string }
     files: File[] | null
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -17,21 +13,9 @@ interface FileInputProps {
 
 const ss = ['1', '1', '1', '1', '1']
 
-export default function FileInput({
-    title,
-    description,
-    classes = { wrapper: '', title: '', description: '', label: '' },
-    files,
-    onChange,
-}: FileInputProps) {
+export default function FileInput({ files, onChange }: FileInputProps) {
     return (
-        <div className={cn('flex flex-col', classes.wrapper)}>
-            <div className={cn('ml-4.25 flex gap-2 text-sm sm:text-base', classes.title)}>
-                {title}
-                <span className={cn('text-layoutLightGray', classes.description)}>
-                    {description}
-                </span>
-            </div>
+        <>
             <div className="flex gap-2.5 overflow-x-scroll pb-2 pt-2 sm:overflow-x-hidden">
                 {ss.map((el, id) =>
                     files && files[id] ? (
@@ -68,6 +52,6 @@ export default function FileInput({
                     ),
                 )}
             </div>
-        </div>
+        </>
     )
 }
