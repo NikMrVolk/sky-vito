@@ -44,17 +44,35 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
         files ? addItemWithImg({ ...value, formData }) : addItemWithoutImg(value)
     }
 
+    const checkingMaxNumberImages = (files: File[] | null, arrFiles: File[]) => {
+        let newArr = []
+
+        if (files?.length) {
+            newArr = [...files, ...arrFiles]
+        } else {
+            newArr = [...arrFiles]
+        }
+
+        if (newArr.length > 5) {
+            // todo: Add toast!
+            alert('Больше 5 нельзя')
+            newArr.length = 5
+        }
+
+        return newArr
+    }
+
     const handleChangeFiles = (e: ChangeEvent<HTMLInputElement>) => {
-        const AddedFiles = e.target.files
+        const addedFiles = e.target.files
         const arrFiles = []
 
-        if (AddedFiles) {
-            for (let i = 0; i < AddedFiles.length; i++) {
-                arrFiles.push(AddedFiles[i])
+        if (addedFiles) {
+            for (let i = 0; i < addedFiles.length; i++) {
+                arrFiles.push(addedFiles[i])
             }
         }
 
-        files ? setFiles([...files, ...arrFiles]) : setFiles([...arrFiles])
+        setFiles(checkingMaxNumberImages(files, arrFiles))
     }
 
     const handleDeleteFiles = (id: number) => {
