@@ -9,11 +9,12 @@ interface FileInputProps {
     classes?: { wrapper?: string; title?: string; description?: string; label?: string }
     files: File[] | null
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
+    deleteFiles: (id: number) => void
 }
 
 const ss = ['1', '1', '1', '1', '1']
 
-export default function FileInput({ files, onChange }: FileInputProps) {
+export default function FileInput({ files, onChange, deleteFiles }: FileInputProps) {
     return (
         <>
             <div className="flex gap-2.5 overflow-x-scroll pb-2 pt-2 sm:overflow-x-hidden">
@@ -32,7 +33,7 @@ export default function FileInput({ files, onChange }: FileInputProps) {
                             />
                             <MinusCircle
                                 className="absolute -right-1 -top-1 h-4 w-4 rounded-full bg-black text-white"
-                                // onClick={() => handleDeletePhoto(id)}
+                                onClick={() => deleteFiles(id)}
                             />
                         </div>
                     ) : (

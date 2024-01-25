@@ -57,6 +57,11 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
         files ? setFiles([...files, ...arrFiles]) : setFiles([...arrFiles])
     }
 
+    const handleDeleteFiles = (id: number) => {
+        const filesAfterDelete = files?.filter((_, index) => index !== id)
+        filesAfterDelete?.length ? setFiles(filesAfterDelete) : setFiles(null)
+    }
+
     return (
         <div className="flex flex-col gap-7.5">
             <BackLinkWithCross
@@ -75,7 +80,11 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
                 <TextArea placeholder="Самый..." value={value} setValue={setValue} />
             </InputWrapper>
             <InputWrapper title="Фотографии товара" description="не более 5 фотографий">
-                <FileInput files={files} onChange={handleChangeFiles} />
+                <FileInput
+                    files={files}
+                    onChange={handleChangeFiles}
+                    deleteFiles={handleDeleteFiles}
+                />
             </InputWrapper>
             <InputWrapper>
                 <div className="relative">
