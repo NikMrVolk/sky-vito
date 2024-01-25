@@ -7,7 +7,8 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import BackLinkWithCross from '../common/BackTextWithCross'
 import Button from '../UI/buttons/Button'
 import FileInput from '../UI/inputs/FileInput'
-import InputWithTitle from '../UI/inputs/InputWithTitle'
+import Input from '../UI/inputs/Input'
+import InputWrapper from '../UI/inputs/InputWrapper'
 import TextArea from '../UI/inputs/TextArea'
 
 import { itemsService } from '@/services/items/items.service'
@@ -67,40 +68,27 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
                 onClick={() => setActive(false)}
                 classes={{ wrapper: 'sm:flex', arrow: 'sm:hidden' }}
             />
-            <InputWithTitle
-                title="Название"
-                placeholder="Я хочу продать..."
-                classes={{ title: 'text-black' }}
-            >
-                <input
-                    type="text"
-                    className="w-full rounded-5 border border-black/20 py-2.5 pl-4.25 pr-10 
-                    text-sm focus:border-layoutBlue focus:outline-none sm:rounded-md sm:text-base"
+            <InputWrapper title="Название">
+                <Input
                     placeholder="Я хочу продать..."
                     value={value.title}
                     onChange={e => setValue({ ...value, title: e.target.value })}
                 />
-            </InputWithTitle>
-            <InputWithTitle
-                title="Описание"
-                placeholder="Описание..."
-                classes={{ title: 'text-black' }}
-            >
+            </InputWrapper>
+            <InputWrapper title="Описание">
                 <TextArea placeholder="Самый..." value={value} setValue={setValue} />
-            </InputWithTitle>
+            </InputWrapper>
             <FileInput title="Фотографии товара" description="не более 5 фотографий" />
-            <InputWithTitle title="Цена" placeholder="" classes={{ wrapper: '-mt-2' }}>
+            <InputWrapper>
                 <div className="relative">
-                    <input
-                        type="number"
-                        className="w-full rounded-5 border border-black/20 py-2.5 pl-4.25 pr-10 
-                    text-sm focus:border-layoutBlue focus:outline-none sm:rounded-md sm:text-base"
+                    <Input
                         value={value.price}
                         onChange={e => setValue({ ...value, price: +e.target.value })}
+                        className="w-full"
                     />
                     <span className="absolute bottom-1/3 right-4 text-base leading-4">₽</span>
                 </div>
-            </InputWithTitle>
+            </InputWrapper>
             <Button onClick={handleAddItem}>
                 {isAddWithPending && isAddWithoutPending ? 'Загрузка...' : 'Опубликовать'}
             </Button>
