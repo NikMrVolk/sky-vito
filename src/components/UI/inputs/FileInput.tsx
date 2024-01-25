@@ -8,13 +8,48 @@ import Image from 'next/image'
 interface FileInputProps {
     classes?: { wrapper?: string; title?: string; description?: string; label?: string }
     files: File[] | null
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void
-    deleteFiles: (id: number) => void
+    setFiles: (e: File[] | null) => void
 }
 
 const ss = ['1', '1', '1', '1', '1']
 
-export default function FileInput({ files, onChange, deleteFiles }: FileInputProps) {
+export default function FileInput({ files, setFiles }: FileInputProps) {
+    const checkingMaxNumberImages = (files: File[] | null, arrFiles: File[]) => {
+        let newArr = []
+
+        if (files?.length) {
+            newArr = [...files, ...arrFiles]
+        } else {
+            newArr = [...arrFiles]
+        }
+
+        if (newArr.length > 5) {
+            // todo: Add toast!
+            alert('Больше 5 нельзя')
+            newArr.length = 5
+        }
+
+        return newArr
+    }
+
+    const handleChangeFiles = (e: ChangeEvent<HTMLInputElement>) => {
+        const addedFiles = e.target.files
+        const arrFiles = []
+
+        if (addedFiles) {
+            for (let i = 0; i < addedFiles.length; i++) {
+                arrFiles.push(addedFiles[i])
+            }
+        }
+
+        setFiles(checkingMaxNumberImages(files, arrFiles))
+    }
+
+    const handleDeleteFiles = (id: number) => {
+        const filesAfterDelete = files?.filter((_, index) => index !== id)
+        filesAfterDelete?.length ? setFiles(filesAfterDelete) : setFiles(null)
+    }
+
     return (
         <>
             <div className="flex gap-2.5 overflow-x-scroll pb-2 pt-2 sm:overflow-x-hidden">
@@ -33,7 +68,7 @@ export default function FileInput({ files, onChange, deleteFiles }: FileInputPro
                             />
                             <MinusCircle
                                 className="absolute -right-1 -top-1 h-4 w-4 rounded-full bg-black text-white"
-                                onClick={() => deleteFiles(id)}
+                                onClick={() => handleDeleteFiles(id)}
                             />
                         </div>
                     ) : (
@@ -46,7 +81,7 @@ export default function FileInput({ files, onChange, deleteFiles }: FileInputPro
                                 accept="image/*"
                                 className="hidden"
                                 multiple
-                                onChange={e => onChange(e)}
+                                onChange={e => handleChangeFiles(e)}
                             />
                             <div className="px-11">+</div>
                         </label>

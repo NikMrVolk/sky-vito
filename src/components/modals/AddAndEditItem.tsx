@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 
 import BackLinkWithCross from '../common/BackTextWithCross'
 import Button from '../UI/buttons/Button'
@@ -44,42 +44,6 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
         files ? addItemWithImg({ ...value, formData }) : addItemWithoutImg(value)
     }
 
-    const checkingMaxNumberImages = (files: File[] | null, arrFiles: File[]) => {
-        let newArr = []
-
-        if (files?.length) {
-            newArr = [...files, ...arrFiles]
-        } else {
-            newArr = [...arrFiles]
-        }
-
-        if (newArr.length > 5) {
-            // todo: Add toast!
-            alert('Больше 5 нельзя')
-            newArr.length = 5
-        }
-
-        return newArr
-    }
-
-    const handleChangeFiles = (e: ChangeEvent<HTMLInputElement>) => {
-        const addedFiles = e.target.files
-        const arrFiles = []
-
-        if (addedFiles) {
-            for (let i = 0; i < addedFiles.length; i++) {
-                arrFiles.push(addedFiles[i])
-            }
-        }
-
-        setFiles(checkingMaxNumberImages(files, arrFiles))
-    }
-
-    const handleDeleteFiles = (id: number) => {
-        const filesAfterDelete = files?.filter((_, index) => index !== id)
-        filesAfterDelete?.length ? setFiles(filesAfterDelete) : setFiles(null)
-    }
-
     return (
         <div className="flex flex-col gap-7.5">
             <BackLinkWithCross
@@ -98,11 +62,7 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
                 <TextArea placeholder="Самый..." value={value} setValue={setValue} />
             </InputWrapper>
             <InputWrapper title="Фотографии товара" description="не более 5 фотографий">
-                <FileInput
-                    files={files}
-                    onChange={handleChangeFiles}
-                    deleteFiles={handleDeleteFiles}
-                />
+                <FileInput files={files} setFiles={setFiles} />
             </InputWrapper>
             <InputWrapper>
                 <div className="relative">
