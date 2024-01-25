@@ -2,8 +2,6 @@
 
 import { ChangeEvent, useState } from 'react'
 
-import { useMutation, useQuery } from '@tanstack/react-query'
-
 import BackLinkWithCross from '../common/BackTextWithCross'
 import Button from '../UI/buttons/Button'
 import FileInput from '../UI/inputs/FileInput'
@@ -11,8 +9,7 @@ import Input from '../UI/inputs/Input'
 import InputWrapper from '../UI/inputs/InputWrapper'
 import TextArea from '../UI/inputs/TextArea'
 
-import { itemsService } from '@/services/items/items.service'
-import { QueryKeys } from '@/utils/constants/reactQuery'
+import { useAddAndEditItems } from '@/hooks/useAddAndEditItems'
 
 interface AddAndEditItemProps {
     setActive: (v: boolean) => void
@@ -29,32 +26,13 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
     const [value, setValue] = useState<FormDataType>({ title: '', description: '', price: 0 })
     const [files, setFiles] = useState<File[] | null>(null)
 
-    const { refetch } = useQuery({
-        queryKey: [QueryKeys.GET_ADS],
-        queryFn: itemsService.getAll,
-        enabled: false,
-    })
+    const onSuccess = () => {
+        setValue({ title: '', description: '', price: 0 })
+        setFiles(null)
+        setActive(false)
+    }
 
-    const { mutate: addWithoutImg, isPending: isAddWithoutPending } = useMutation({
-        mutationKey: [QueryKeys.ADD_ITEM_WITHOUT_IMGS],
-        mutationFn: (data: FormDataType) => itemsService.addItemWithoutImage(data),
-        onSuccess: () => {
-            setValue({ title: '', description: '', price: 0 })
-            setActive(false)
-            refetch()
-        },
-    })
-
-    const { mutate: addWithImg, isPending: isAddWithPending } = useMutation({
-        mutationKey: [QueryKeys.ADD_ITEM_WITH_IMGS],
-        mutationFn: (data: FormDataType) => itemsService.addItemWithImage(data),
-        onSuccess: () => {
-            setValue({ title: '', description: '', price: 0 })
-            setFiles(null)
-            setActive(false)
-            refetch()
-        },
-    })
+    const { addItemWithImg, addItemWithoutImg, isPending } = useAddAndEditItems(onSuccess)
 
     const handleAddItem = () => {
         const formData = new FormData()
@@ -63,7 +41,7 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
             formData.append('files', el)
         })
 
-        files ? addWithImg({ ...value, formData }) : addWithoutImg(value)
+        files ? addItemWithImg({ ...value, formData }) : addItemWithoutImg(value)
     }
 
     const handleChangeFiles = (e: ChangeEvent<HTMLInputElement>) => {
@@ -112,9 +90,7 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
                     <span className="absolute bottom-1/3 right-4 text-base leading-4">₽</span>
                 </div>
             </InputWrapper>
-            <Button onClick={handleAddItem}>
-                {isAddWithPending && isAddWithoutPending ? 'Загрузка...' : 'Опубликовать'}
-            </Button>
+            <Button onClick={handleAddItem}>{isPending ? 'Загрузка...' : 'Опубликовать'}</Button>
         </div>
     )
 }
