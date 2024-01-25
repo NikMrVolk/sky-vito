@@ -17,11 +17,14 @@ export const itemsService = {
     },
 
     async addItemWithImage(data: FormDataType) {
-        const response = await instance.post<ItemType>(`/ads`, data.files, {
+        const response = await instance.post<ItemType>(`/ads`, data.formData, {
             params: {
                 title: data.title,
                 description: data.description,
                 price: data.price,
+            },
+            headers: {
+                'Content-Type': 'multipart/form-data',
             },
         })
 

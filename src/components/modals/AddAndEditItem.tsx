@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
 
@@ -22,12 +22,12 @@ export interface FormDataType {
     title: string
     description: string
     price: number
-    files?: FileList
+    formData?: FormData
 }
 
 export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
     const [value, setValue] = useState<FormDataType>({ title: '', description: '', price: 0 })
-    const [files, setFiles] = useState<FileList | null>(null)
+    const [files, setFiles] = useState<File[] | null>(null)
 
     const { refetch } = useQuery({
         queryKey: [QueryKeys.GET_ADS],
@@ -57,8 +57,26 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
     })
 
     const handleAddItem = () => {
-        console.log({ ...value, files })
-        files ? addWithImg({ ...value, files }) : addWithoutImg(value)
+        const formData = new FormData()
+
+        files?.forEach((el: File) => {
+            formData.append('files', el)
+        })
+
+        files ? addWithImg({ ...value, formData }) : addWithoutImg(value)
+    }
+
+    const handleChangeFiles = (e: ChangeEvent<HTMLInputElement>) => {
+        const AddedFiles = e.target.files
+        const arrFiles = []
+
+        if (AddedFiles) {
+            for (let i = 0; i < AddedFiles.length; i++) {
+                arrFiles.push(AddedFiles[i])
+            }
+        }
+
+        files ? setFiles([...files, ...arrFiles]) : setFiles([...arrFiles])
     }
 
     return (
@@ -78,7 +96,12 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
             <InputWrapper title="Описание">
                 <TextArea placeholder="Самый..." value={value} setValue={setValue} />
             </InputWrapper>
-            <FileInput title="Фотографии товара" description="не более 5 фотографий" />
+            <FileInput
+                title="Фотографии товара"
+                description="не более 5 фотографий"
+                files={files}
+                onChange={handleChangeFiles}
+            />
             <InputWrapper>
                 <div className="relative">
                     <Input
