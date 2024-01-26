@@ -13,8 +13,8 @@ import Input from '../UI/inputs/Input'
 import InputWrapper from '../UI/inputs/InputWrapper'
 import TextArea from '../UI/inputs/TextArea'
 
+import { useAddItem } from '@/hooks/items/useAddItem'
 import { useEditItem } from '@/hooks/items/useEditItem'
-import { useAddAndEditItems } from '@/hooks/useAddAndEditItems'
 
 interface AddAndEditItemProps {
     modalTitle: string
@@ -49,7 +49,7 @@ export default function AddAndEditItem({ setActive, startValue, modalTitle }: Ad
         setActive(false)
     }
 
-    const { addItemWithImg, addItemWithoutImg, isPending } = useAddAndEditItems(onAddItemSuccess)
+    const { addItemWithImg, addItemWithoutImg, isPending } = useAddItem(onAddItemSuccess)
     const { changeItemText, addImgToItem } = useEditItem(() => setActive(false), slug)
 
     const handleAddItem = () => {

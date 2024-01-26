@@ -6,7 +6,7 @@ import { FormDataType } from '@/components/modals/AddAndEditItem'
 import { itemsService } from '@/services/items/items.service'
 import { QueryKeys } from '@/utils/constants/reactQuery'
 
-export const useAddAndEditItems = (onSuccess: () => void) => {
+export const useAddItem = (onSuccess: () => void) => {
     const { refetch } = useQuery({
         queryKey: [QueryKeys.GET_ADS],
         queryFn: itemsService.getAll,
