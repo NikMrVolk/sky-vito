@@ -37,7 +37,7 @@ export default function AddItemFooter() {
             )}
 
             <Modal active={active} setActive={setActive}>
-                <AddAndEditItem setActive={setActive} />
+                <AddAndEditItem modalTitle="Новое объявление" setActive={setActive} />
             </Modal>
         </>
     )

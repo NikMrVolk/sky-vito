@@ -10,6 +10,12 @@ export const itemsService = {
         return response
     },
 
+    async getUserItems() {
+        const response = await instance.get<ItemType[]>(`/ads/me`)
+
+        return response
+    },
+
     async getOne(slug: string) {
         const response = await axiosClassic.get<ItemType>(`/ads/${slug}`)
 

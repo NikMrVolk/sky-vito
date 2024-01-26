@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+//todo: edit component to remove eslintIgnore
 'use client'
 
 import { useState } from 'react'
@@ -12,17 +14,24 @@ import TextArea from '../UI/inputs/TextArea'
 import { useAddAndEditItems } from '@/hooks/useAddAndEditItems'
 
 interface AddAndEditItemProps {
+    modalTitle: string
     setActive: (v: boolean) => void
+    startValue?: {
+        title: string
+        description: string
+        price: number
+        // images?: any
+    }
 }
 
 export interface FormDataType {
     title: string
     description: string
     price: number
-    formData?: FormData
+    formData?: FormData | File[]
 }
 
-export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
+export default function AddAndEditItem({ setActive, startValue, modalTitle }: AddAndEditItemProps) {
     const [value, setValue] = useState<FormDataType>({ title: '', description: '', price: 0 })
     const [files, setFiles] = useState<File[] | null>(null)
 
@@ -47,19 +56,23 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
     return (
         <div className="flex flex-col gap-7.5">
             <BackLinkWithCross
-                text="Новое объявление"
+                text={modalTitle}
                 onClick={() => setActive(false)}
                 classes={{ wrapper: 'sm:flex', arrow: 'sm:hidden' }}
             />
             <InputWrapper title="Название">
                 <Input
                     placeholder="Я хочу продать..."
-                    value={value.title}
+                    value={startValue?.title ?? value.title}
                     onChange={e => setValue({ ...value, title: e.target.value })}
                 />
             </InputWrapper>
             <InputWrapper title="Описание">
-                <TextArea placeholder="Самый..." value={value} setValue={setValue} />
+                <TextArea
+                    placeholder="Самый..."
+                    value={startValue?.description ?? value.description}
+                    onChange={e => setValue({ ...value, description: e.target.value })}
+                />
             </InputWrapper>
             <InputWrapper title="Фотографии товара" description="не более 5 фотографий">
                 <FileInput files={files} setFiles={setFiles} />
@@ -67,7 +80,7 @@ export default function AddAndEditItem({ setActive }: AddAndEditItemProps) {
             <InputWrapper>
                 <div className="relative">
                     <Input
-                        value={value.price}
+                        value={startValue?.price ?? value.price}
                         onChange={e => setValue({ ...value, price: +e.target.value })}
                         className="w-full"
                     />

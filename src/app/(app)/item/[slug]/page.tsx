@@ -7,14 +7,14 @@ import Link from 'next/link'
 import IsAuthComponent from '@/components/common/IsAuthComponent'
 import BlockWrapper from '@/components/common/wrappers/BlockWrapper'
 import ItemBaseInfo from '@/components/item/page/ItemBaseInfo'
+import ItemButtons from '@/components/item/page/ItemButtons'
 import ItemPhotos from '@/components/item/page/ItemPhotos'
-import Button from '@/components/UI/buttons/Button'
 import { itemsService } from '@/services/items/items.service'
 import { QueryKeys } from '@/utils/constants/reactQuery'
 import { API_URL, SELLER_ROUTE } from '@/utils/constants/routes'
 
 export default function ItemPage({ params }: { params: { slug: string } }) {
-    const { data, isLoading } = useQuery({
+    const { data } = useQuery({
         queryKey: [QueryKeys.GET_ONE_AD],
         queryFn: () => itemsService.getOne(params.slug),
     })
@@ -24,7 +24,8 @@ export default function ItemPage({ params }: { params: { slug: string } }) {
         queryFn: itemsService.getAllComments,
     })
 
-    if (isLoading) return <div className="text-center text-xl">Загрузка...</div>
+    // todo: choose to loading
+    if (!data) return <div className="text-center text-xl">Загрузка...</div>
 
     return (
         <BlockWrapper className="flex flex-col gap-7.5 overflow-x-hidden sm:overflow-x-visible">
@@ -41,10 +42,7 @@ export default function ItemPage({ params }: { params: { slug: string } }) {
                             comments={comments?.data}
                         />
                     )}
-                    <div className="flex w-full flex-col gap-2.5 lg:flex-row">
-                        <Button className="w-full lg:w-auto">Редактировать</Button>
-                        <Button className="w-full lg:w-auto">Снять с публикации</Button>
-                    </div>
+                    <ItemButtons itemData={data?.data} />
                     <Link href={SELLER_ROUTE + `/${data?.data.user.id}`}>
                         <div className="flex gap-3">
                             <div className="h-10 w-10 rounded-full bg-layoutGray/30">

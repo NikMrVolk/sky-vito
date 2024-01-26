@@ -39,7 +39,7 @@ export default function HeaderButtons() {
             )}
 
             <Modal active={active} setActive={setActive}>
-                <AddAndEditItem setActive={setActive} />
+                <AddAndEditItem modalTitle="Новое объявление" setActive={setActive} />
             </Modal>
         </div>
     )

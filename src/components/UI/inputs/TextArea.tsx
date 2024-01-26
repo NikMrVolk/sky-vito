@@ -1,14 +1,15 @@
-import { FormDataType } from '@/components/modals/AddAndEditItem'
+import { ChangeEvent } from 'react'
+
 import { cn } from '@/lib/className'
 
 interface TextAreaProps {
     placeholder: string
     className?: string
-    value: FormDataType
-    setValue: (v: FormDataType) => void
+    value: string
+    onChange: (v: ChangeEvent<HTMLTextAreaElement>) => void
 }
 
-export default function TextArea({ placeholder, className = '', value, setValue }: TextAreaProps) {
+export default function TextArea({ placeholder, className = '', value, onChange }: TextAreaProps) {
     return (
         <textarea
             className={cn(
@@ -17,8 +18,8 @@ export default function TextArea({ placeholder, className = '', value, setValue 
                 className,
             )}
             placeholder={placeholder}
-            value={value.description}
-            onChange={e => setValue({ ...value, description: e.target.value })}
+            value={value}
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onChange(e)}
         />
     )
 }
