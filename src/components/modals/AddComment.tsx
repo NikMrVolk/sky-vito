@@ -2,8 +2,8 @@
 
 import BackLinkWithCross from '../common/BackTextWithCross'
 import Button from '../UI/buttons/Button'
-import InputWithTitle from '../UI/inputs/InputWithTitle'
-// import TextArea from '../UI/inputs/TextArea'
+import InputWrapper from '../UI/inputs/InputWrapper'
+import TextArea from '../UI/inputs/TextArea'
 
 import { IComments } from '@/services/items/items.types'
 interface AddCommentProps {
@@ -12,7 +12,6 @@ interface AddCommentProps {
 }
 
 export default function AddComment({ setActive, comments }: AddCommentProps) {
-    // console.log(comments)
     return (
         <div className="flex max-w-150 flex-col gap-7.5 overflow-y-scroll sm:max-w-120">
             <BackLinkWithCross
@@ -20,13 +19,9 @@ export default function AddComment({ setActive, comments }: AddCommentProps) {
                 onClick={() => setActive(false)}
                 classes={{ wrapper: 'sm:flex', arrow: 'sm:hidden' }}
             />
-            <InputWithTitle
-                title="Описание"
-                placeholder="Описание..."
-                classes={{ title: 'text-black' }}
-            >
-                {/* <TextArea placeholder="Ваш комментарий" /> */}
-            </InputWithTitle>
+            <InputWrapper title="Описание" classes={{ title: 'text-black' }}>
+                <TextArea placeholder="Описание..." value="" onChange={() => {}} />
+            </InputWrapper>
             <Button>Опубликовать</Button>
             <div className="flex flex-col gap-7.5 sm:max-h-75">
                 {comments?.map(el => (

@@ -1,16 +1,28 @@
 'use client'
 
+import { useState } from 'react'
+
 import { useQuery } from '@tanstack/react-query'
 
 import Button from '../UI/buttons/Button'
-import InputWithTitle from '../UI/inputs/InputWithTitle'
+import Input from '../UI/inputs/Input'
+import InputWrapper from '../UI/inputs/InputWrapper'
 
 import ProfileAvatar from './ProfileAvatar'
 
 import { userService } from '@/services/user/user.service'
 import { QueryKeys } from '@/utils/constants/reactQuery'
 
+interface IProfileForm {
+    name: string
+    surname: string
+    city: string
+    phone: string
+}
+
 export default function ProfileInfo() {
+    const [value, setValue] = useState<IProfileForm>({ name: '', surname: '', city: '', phone: '' })
+
     const { data } = useQuery({
         queryKey: [QueryKeys.GET_CURRENT_USER],
         queryFn: () => userService.getCurrent(),
@@ -23,28 +35,42 @@ export default function ProfileInfo() {
                 <ProfileAvatar phoneNumber={data?.phone} />
                 <div className="flex max-w-153.5 flex-col gap-4.5 sm:w-full">
                     <div className="flex flex-col gap-4.5 lg:flex-row">
-                        <InputWithTitle
+                        <InputWrapper
                             title="Имя"
-                            placeholder="Антон"
-                            classes={{ wrapper: 'w-full' }}
-                        />
-                        <InputWithTitle
+                            classes={{ title: 'text-layoutLightGray', wrapper: 'w-full' }}
+                        >
+                            <Input
+                                placeholder="Антон"
+                                value={value.name}
+                                onChange={e => setValue({ ...value, name: e.target.value })}
+                            />
+                        </InputWrapper>
+                        <InputWrapper
                             title="Фамилия"
-                            placeholder="Городецкий"
-                            classes={{ wrapper: 'w-full' }}
-                        />
+                            classes={{ title: 'text-layoutLightGray', wrapper: 'w-full' }}
+                        >
+                            <Input
+                                placeholder="Городецкий"
+                                value={value.surname}
+                                onChange={e => setValue({ ...value, surname: e.target.value })}
+                            />
+                        </InputWrapper>
                     </div>
-                    <InputWithTitle
-                        title="Город"
-                        placeholder="Санкт-Петербург"
-                        classes={{ wrapper: 'lg:max-w-75' }}
-                    />
-                    <InputWithTitle
-                        title="Телефон"
-                        placeholder="89161234567"
-                        type="number"
-                        classes={{ wrapper: 'mb-3' }}
-                    />
+                    <InputWrapper title="Город" classes={{ wrapper: 'lg:max-w-75' }}>
+                        <Input
+                            placeholder="Санкт-Петербург"
+                            value={value.surname}
+                            onChange={e => setValue({ ...value, surname: e.target.value })}
+                        />
+                    </InputWrapper>
+                    <InputWrapper title="Телефон" classes={{ wrapper: 'mb-3' }}>
+                        <Input
+                            type="number"
+                            placeholder="89161234567"
+                            value={value.surname}
+                            onChange={e => setValue({ ...value, surname: e.target.value })}
+                        />
+                    </InputWrapper>
                     <Button className="py-2.75">Сохранить</Button>
                 </div>
             </div>
