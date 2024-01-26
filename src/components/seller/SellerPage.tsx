@@ -2,6 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import BackLink from '@/components/common/BackTextWithCross'
 import IsAuthComponent from '@/components/common/IsAuthComponent'
@@ -11,13 +12,20 @@ import SellerInfo from '@/components/seller/SellerInfo'
 import { itemsService } from '@/services/items/items.service'
 import { userService } from '@/services/user/user.service'
 import { QueryKeys } from '@/utils/constants/reactQuery'
-import { MAIN_ROUTE } from '@/utils/constants/routes'
+import { MAIN_ROUTE, PROFILE_ROUTE } from '@/utils/constants/routes'
 
 interface SellerPageProps {
     slug: string
 }
 
 export default function SellerPage({ slug }: SellerPageProps) {
+    const router = useRouter()
+
+    const { data: currentUser } = useQuery({
+        queryKey: [QueryKeys.GET_CURRENT_USER],
+        queryFn: () => userService.getCurrent(),
+    })
+
     const { data, isLoading } = useQuery({
         queryKey: [QueryKeys.GET_ALL_USERS],
         queryFn: userService.getAll,
@@ -29,6 +37,8 @@ export default function SellerPage({ slug }: SellerPageProps) {
     })
 
     if (isLoading) return <>Loading...</>
+
+    if (currentUser?.id === +slug) router.push(PROFILE_ROUTE)
 
     const currentSeller = data?.find(el => el.id === +slug)
     const currentSellerItems = items?.data.filter(el => el.user_id === +slug)
