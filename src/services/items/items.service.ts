@@ -44,7 +44,11 @@ export const itemsService = {
     },
 
     async addImgToItem(data: { formData: FormData; slug: string }) {
-        const response = await instance.post<ItemType>(`/ads/${data.slug}/image`, data.formData)
+        const response = await instance.post<ItemType>(`/ads/${data.slug}/image`, data.formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
 
         return response
     },

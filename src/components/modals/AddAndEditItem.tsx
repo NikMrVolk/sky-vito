@@ -13,8 +13,8 @@ import Input from '../UI/inputs/Input'
 import InputWrapper from '../UI/inputs/InputWrapper'
 import TextArea from '../UI/inputs/TextArea'
 
-import { useAddAndEditItems } from '@/hooks/useAddAndEditItems'
 import { useEditItem } from '@/hooks/items/useEditItem'
+import { useAddAndEditItems } from '@/hooks/useAddAndEditItems'
 
 interface AddAndEditItemProps {
     modalTitle: string
@@ -50,14 +50,23 @@ export default function AddAndEditItem({ setActive, startValue, modalTitle }: Ad
     }
 
     const { addItemWithImg, addItemWithoutImg, isPending } = useAddAndEditItems(onAddItemSuccess)
-    const { changeItemText } = useEditItem(() => setActive(false), slug)
+    const { changeItemText, addImgToItem } = useEditItem(() => setActive(false), slug)
 
     const handleAddItem = () => {
-        const formData = new FormData()
-
         if (startValue) {
+            if (files) {
+                files.forEach(el => {
+                    const formData = new FormData()
+                    formData.append('file', el)
+
+                    addImgToItem(formData)
+                })
+            }
+
             changeItemText(value)
         } else {
+            const formData = new FormData()
+
             files?.forEach((el: File) => {
                 formData.append('files', el)
             })

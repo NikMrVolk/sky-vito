@@ -9,5 +9,6 @@ export enum QueryKeys {
     GET_CURRENT_USER = 'get-current-user',
     ADD_ITEM_WITHOUT_IMGS = 'add-item-without-imgs',
     ADD_ITEM_WITH_IMGS = 'add-item-with-imgs',
+    ADD_IMG_TO_ITEM = 'add-img-to-item',
     CHANGE_ITEM_TEXT = 'change-item-text',
 }

@@ -20,7 +20,16 @@ export const useEditItem = (onSuccess: () => void, slug: string) => {
         },
     })
 
-    const isPending = isChangePending
+    const { mutate: addImgToItem, isPending: isAddImgPending } = useMutation({
+        mutationKey: [QueryKeys.ADD_IMG_TO_ITEM],
+        mutationFn: (formData: FormData) => itemsService.addImgToItem({ formData, slug }),
+        onSuccess: () => {
+            onSuccess()
+            refetch()
+        },
+    })
 
-    return { changeItemText, isPending }
+    const isPending = isChangePending || isAddImgPending
+
+    return { changeItemText, addImgToItem, isPending }
 }
