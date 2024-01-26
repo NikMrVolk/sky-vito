@@ -11,13 +11,18 @@ import Modal from '@/components/UI/modals/Modal'
 import { itemsService } from '@/services/items/items.service'
 import { ItemType } from '@/services/items/items.types'
 import { QueryKeys } from '@/utils/constants/reactQuery'
+import { useDeleteItemAndImg } from '@/hooks/items/useDeleteItemAndImg'
+import { useParams } from 'next/navigation'
 
 interface ItemButtonsProps {
     itemData: ItemType
 }
 
 export default function ItemButtons({ itemData }: ItemButtonsProps) {
+    const { slug } = useParams<{ slug: string }>()
     const [active, setActive] = useState<boolean>(false)
+
+    const { deleteItem } = useDeleteItemAndImg(slug)
 
     const { data, isLoading } = useQuery({
         queryKey: [QueryKeys.GET_USER_ADS],
@@ -47,7 +52,14 @@ export default function ItemButtons({ itemData }: ItemButtonsProps) {
                     >
                         Редактировать
                     </Button>
-                    <Button className="w-full lg:w-auto">Снять с публикации</Button>
+                    <Button
+                        className="w-full lg:w-auto"
+                        onClick={() => {
+                            deleteItem()
+                        }}
+                    >
+                        Снять с публикации
+                    </Button>
                 </div>
             ) : (
                 <ButtonWithSellerPhone number={+itemData.user.phone} />

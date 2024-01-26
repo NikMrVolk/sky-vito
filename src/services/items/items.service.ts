@@ -59,6 +59,12 @@ export const itemsService = {
         return response
     },
 
+    async deleteItem(slug: string) {
+        const response = await instance.delete<string>(`/ads/${slug}`)
+
+        return response
+    },
+
     async getAllComments() {
         const response = await axiosClassic.get<IComments[]>(`/comments`)
 
