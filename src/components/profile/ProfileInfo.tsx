@@ -16,13 +16,11 @@ export default function ProfileInfo() {
         queryFn: () => userService.getCurrent(),
     })
 
-    console.log('user: ', data)
-
     return (
         <section className="mb-10 mt-7.5 flex flex-col gap-7.5">
             <div className="text-lg sm:text-3.5xl">Настройки профиля</div>
             <div className="flex flex-col gap-7.5 sm:flex-row md:gap-12.5">
-                <ProfileAvatar />
+                <ProfileAvatar phoneNumber={data?.phone} />
                 <div className="flex max-w-153.5 flex-col gap-4.5 sm:w-full">
                     <div className="flex flex-col gap-4.5 lg:flex-row">
                         <InputWithTitle

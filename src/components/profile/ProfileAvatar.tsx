@@ -1,4 +1,5 @@
 import Image from 'next/image'
+
 import ButtonWithSellerPhone from '../UI/buttons/ButtonWithSellerPhone'
 
 import { cn } from '@/lib/className'
@@ -8,9 +9,15 @@ interface ProfileAvatarProps {
     imgSrc?: string
     isOther?: boolean
     classes?: { wrapper?: string; photo?: string; button?: string; link?: string }
+    phoneNumber?: string
 }
 
-export default function ProfileAvatar({ isOther, classes, imgSrc = '' }: ProfileAvatarProps) {
+export default function ProfileAvatar({
+    isOther,
+    classes,
+    imgSrc = '',
+    phoneNumber,
+}: ProfileAvatarProps) {
     return (
         <div className={cn('flex flex-col items-center gap-2.5', classes?.wrapper)}>
             <div
@@ -31,7 +38,7 @@ export default function ProfileAvatar({ isOther, classes, imgSrc = '' }: Profile
             </div>
             {isOther ? (
                 <ButtonWithSellerPhone
-                    number={89051023445}
+                    number={phoneNumber}
                     classes={{ buttonWrapper: classes?.button }}
                 />
             ) : (

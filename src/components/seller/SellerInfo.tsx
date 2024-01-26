@@ -14,7 +14,7 @@ export default function SellerInfo({ curentSeller }: { slug: string; curentSelle
                 <div>{curentSeller?.city}</div>
                 <div>Продает товары с {curentSeller?.sells_from}</div>
                 <ButtonWithSellerPhone
-                    number={89051023445}
+                    number={curentSeller?.phone}
                     classes={{ buttonWrapper: 'hidden xs:flex xs:mt-5' }}
                 />
             </div>

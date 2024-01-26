@@ -3,16 +3,16 @@
 import { useState } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
+import { useParams } from 'next/navigation'
 
 import AddAndEditItem from '@/components/modals/AddAndEditItem'
 import Button from '@/components/UI/buttons/Button'
 import ButtonWithSellerPhone from '@/components/UI/buttons/ButtonWithSellerPhone'
 import Modal from '@/components/UI/modals/Modal'
+import { useDeleteItemAndImg } from '@/hooks/items/useDeleteItemAndImg'
 import { itemsService } from '@/services/items/items.service'
 import { ItemType } from '@/services/items/items.types'
 import { QueryKeys } from '@/utils/constants/reactQuery'
-import { useDeleteItemAndImg } from '@/hooks/items/useDeleteItemAndImg'
-import { useParams } from 'next/navigation'
 
 interface ItemButtonsProps {
     itemData: ItemType
@@ -62,7 +62,7 @@ export default function ItemButtons({ itemData }: ItemButtonsProps) {
                     </Button>
                 </div>
             ) : (
-                <ButtonWithSellerPhone number={+itemData.user.phone} />
+                <ButtonWithSellerPhone number={itemData.user.phone} />
             )}
             <Modal active={active} setActive={setActive}>
                 <AddAndEditItem
