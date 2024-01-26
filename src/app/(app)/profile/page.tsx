@@ -20,7 +20,7 @@ export default function Profile() {
             <IsAuthComponent />
             <ProfileInfo />
             {isLoading ? (
-                <>Загрузка...</>
+                <div className="text-center">Загрузка...</div>
             ) : (
                 <ItemsList title="Мои товары" items={data?.data} classes={{ title: 'mb-7.5' }} />
             )}

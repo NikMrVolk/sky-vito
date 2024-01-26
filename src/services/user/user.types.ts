@@ -1,11 +1,14 @@
-export interface UserType {
-    id: number
-    avatar: string
+export interface ChangeUserDataRequest {
     city: string
     email: string
     name: string
     surname: string
     phone: string
-    sells_from: string
     role: string
+}
+
+export interface UserType extends ChangeUserDataRequest {
+    id: number
+    avatar: string
+    sells_from: string
 }
