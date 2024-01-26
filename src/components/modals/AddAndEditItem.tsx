@@ -4,6 +4,8 @@
 
 import { useState } from 'react'
 
+import { useParams } from 'next/navigation'
+
 import BackLinkWithCross from '../common/BackTextWithCross'
 import Button from '../UI/buttons/Button'
 import FileInput from '../UI/inputs/FileInput'
@@ -12,6 +14,7 @@ import InputWrapper from '../UI/inputs/InputWrapper'
 import TextArea from '../UI/inputs/TextArea'
 
 import { useAddAndEditItems } from '@/hooks/useAddAndEditItems'
+import { useEditItem } from '@/hooks/items/useEditItem'
 
 interface AddAndEditItemProps {
     modalTitle: string
@@ -32,25 +35,35 @@ export interface FormDataType {
 }
 
 export default function AddAndEditItem({ setActive, startValue, modalTitle }: AddAndEditItemProps) {
-    const [value, setValue] = useState<FormDataType>({ title: '', description: '', price: 0 })
+    const { slug } = useParams<{ slug: string }>()
+    const [value, setValue] = useState<FormDataType>({
+        title: startValue?.title ?? '',
+        description: startValue?.description ?? '',
+        price: startValue?.price ?? 0,
+    })
     const [files, setFiles] = useState<File[] | null>(null)
 
-    const onSuccess = () => {
+    const onAddItemSuccess = () => {
         setValue({ title: '', description: '', price: 0 })
         setFiles(null)
         setActive(false)
     }
 
-    const { addItemWithImg, addItemWithoutImg, isPending } = useAddAndEditItems(onSuccess)
+    const { addItemWithImg, addItemWithoutImg, isPending } = useAddAndEditItems(onAddItemSuccess)
+    const { changeItemText } = useEditItem(() => setActive(false), slug)
 
     const handleAddItem = () => {
         const formData = new FormData()
 
-        files?.forEach((el: File) => {
-            formData.append('files', el)
-        })
+        if (startValue) {
+            changeItemText(value)
+        } else {
+            files?.forEach((el: File) => {
+                formData.append('files', el)
+            })
 
-        files ? addItemWithImg({ ...value, formData }) : addItemWithoutImg(value)
+            files ? addItemWithImg({ ...value, formData }) : addItemWithoutImg(value)
+        }
     }
 
     return (
@@ -63,14 +76,14 @@ export default function AddAndEditItem({ setActive, startValue, modalTitle }: Ad
             <InputWrapper title="Название">
                 <Input
                     placeholder="Я хочу продать..."
-                    value={startValue?.title ?? value.title}
+                    value={value.title}
                     onChange={e => setValue({ ...value, title: e.target.value })}
                 />
             </InputWrapper>
             <InputWrapper title="Описание">
                 <TextArea
                     placeholder="Самый..."
-                    value={startValue?.description ?? value.description}
+                    value={value.description}
                     onChange={e => setValue({ ...value, description: e.target.value })}
                 />
             </InputWrapper>
@@ -80,7 +93,7 @@ export default function AddAndEditItem({ setActive, startValue, modalTitle }: Ad
             <InputWrapper>
                 <div className="relative">
                     <Input
-                        value={startValue?.price ?? value.price}
+                        value={value.price}
                         onChange={e => setValue({ ...value, price: +e.target.value })}
                         className="w-full"
                     />

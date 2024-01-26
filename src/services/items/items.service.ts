@@ -43,6 +43,12 @@ export const itemsService = {
         return response
     },
 
+    async changeItemText(data: { data: FormDataType; slug: string }) {
+        const response = await instance.patch<ItemType>(`/ads/${data.slug}`, data.data)
+
+        return response
+    },
+
     async getAllComments() {
         const response = await axiosClassic.get<IComments[]>(`/comments`)
 

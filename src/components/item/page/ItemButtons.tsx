@@ -4,9 +4,9 @@ import { useState } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
 
-import ButtonWithSellerPhone from '@/components/UI/buttons/ButtonWithSellerPhone'
 import AddAndEditItem from '@/components/modals/AddAndEditItem'
 import Button from '@/components/UI/buttons/Button'
+import ButtonWithSellerPhone from '@/components/UI/buttons/ButtonWithSellerPhone'
 import Modal from '@/components/UI/modals/Modal'
 import { itemsService } from '@/services/items/items.service'
 import { ItemType } from '@/services/items/items.types'
