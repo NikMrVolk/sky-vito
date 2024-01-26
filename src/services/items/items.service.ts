@@ -43,6 +43,12 @@ export const itemsService = {
         return response
     },
 
+    async addImgToItem(data: { formData: FormData; slug: string }) {
+        const response = await instance.post<ItemType>(`/ads/${data.slug}/image`, data.formData)
+
+        return response
+    },
+
     async changeItemText(data: { data: FormDataType; slug: string }) {
         const response = await instance.patch<ItemType>(`/ads/${data.slug}`, data.data)
 
