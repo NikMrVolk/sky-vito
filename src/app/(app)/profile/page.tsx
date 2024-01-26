@@ -15,6 +15,9 @@ export default function Profile() {
         queryFn: itemsService.getUserItems,
     })
 
+    //temporarily
+    if (isLoading) return <div className="text-center">Загрузка...</div>
+
     return (
         <BlockWrapper>
             <IsAuthComponent />
