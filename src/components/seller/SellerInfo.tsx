@@ -1,8 +1,10 @@
 'use client'
 
-import ProfileAvatar from '@/components/profile/ProfileAvatar'
+import ProfilePhoto from '../profile/ProfilePhoto'
+
 import ButtonWithSellerPhone from '@/components/UI/buttons/ButtonWithSellerPhone'
 import { UserType } from '@/services/user/user.types'
+import { API_URL } from '@/utils/constants/routes'
 
 export default function SellerInfo({ curentSeller }: { slug: string; curentSeller?: UserType }) {
     return (
@@ -18,11 +20,10 @@ export default function SellerInfo({ curentSeller }: { slug: string; curentSelle
                     classes={{ buttonWrapper: 'hidden xs:flex xs:mt-5' }}
                 />
             </div>
-            <ProfileAvatar
-                isOther
-                classes={{ wrapper: 'gap-7.5 mb-10', button: 'xs:hidden' }}
-                imgSrc={curentSeller?.avatar}
-                phoneNumber={curentSeller?.phone}
+            <ProfilePhoto imgSrc={API_URL + curentSeller?.avatar} />
+            <ButtonWithSellerPhone
+                number={curentSeller?.phone}
+                classes={{ buttonWrapper: 'xs:hidden' }}
             />
         </div>
     )

@@ -5,9 +5,9 @@ import { useQuery } from '@tanstack/react-query'
 import IsAuthComponent from '@/components/common/IsAuthComponent'
 import BlockWrapper from '@/components/common/wrappers/BlockWrapper'
 import ItemsList from '@/components/item/ItemsList'
-import ProfileInfo from '@/components/profile/ProfileInfo'
 import { itemsService } from '@/services/items/items.service'
 import { QueryKeys } from '@/utils/constants/reactQuery'
+import ProfileSettings from '@/components/profile/ProfileSettings'
 
 export default function Profile() {
     const { data, isLoading } = useQuery({
@@ -21,7 +21,7 @@ export default function Profile() {
     return (
         <BlockWrapper>
             <IsAuthComponent />
-            <ProfileInfo />
+            <ProfileSettings blockTitle="Настройки профиля" />
             {isLoading ? (
                 <div className="text-center">Загрузка...</div>
             ) : (

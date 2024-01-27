@@ -5,7 +5,11 @@ import { ChangeUserDataRequest } from '@/services/user/user.types'
 import { QueryKeys } from '@/utils/constants/reactQuery'
 
 export const useChangeUserData = () => {
-    const { data: userData, refetch } = useQuery({
+    const {
+        data: userData,
+        refetch,
+        isLoading,
+    } = useQuery({
         queryKey: [QueryKeys.GET_CURRENT_USER],
         queryFn: () => userService.getCurrent(),
     })
@@ -16,11 +20,15 @@ export const useChangeUserData = () => {
         onSuccess: () => refetch(),
     })
 
-    const { mutate: changeUserImg } = useMutation({
+    const { mutate: changeUserImg, isPending } = useMutation({
         mutationKey: [QueryKeys.CHANGE_USER_IMG],
         mutationFn: (data: FormData) => userService.addUserImg(data),
-        onSuccess: () => refetch(),
+        onSuccess: () => {
+            refetch()
+        },
     })
 
-    return { userData, changeUserImg, changeUserData }
+    const isAddImgLoading = isLoading || isPending
+
+    return { userData, changeUserImg, changeUserData, isAddImgLoading }
 }
