@@ -22,6 +22,7 @@ export default function SellerInfo({ curentSeller }: { slug: string; curentSelle
                 isOther
                 classes={{ wrapper: 'gap-7.5 mb-10', button: 'xs:hidden' }}
                 imgSrc={curentSeller?.avatar}
+                phoneNumber={curentSeller?.phone}
             />
         </div>
     )
