@@ -20,4 +20,14 @@ export const userService = {
 
         return response.data
     },
+
+    async addUserImg(data: FormData) {
+        const response = await instance.post<UserType>(`/user/avatar`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+
+        return response.data
+    },
 }

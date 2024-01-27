@@ -16,5 +16,11 @@ export const useChangeUserData = () => {
         onSuccess: () => refetch(),
     })
 
-    return { userData, changeUserData }
+    const { mutate: changeUserImg } = useMutation({
+        mutationKey: [QueryKeys.CHANGE_USER_IMG],
+        mutationFn: (data: FormData) => userService.addUserImg(data),
+        onSuccess: () => refetch(),
+    })
+
+    return { userData, changeUserImg, changeUserData }
 }
