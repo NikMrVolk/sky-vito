@@ -21,6 +21,12 @@ export const userService = {
         return response.data
     },
 
+    async changPassword(data: { password_1: string; password_2: string }) {
+        const response = await instance.put<string>(`/user/password`, data)
+
+        return response.data
+    },
+
     async addUserImg(data: FormData) {
         const response = await instance.post<UserType>(`/user/avatar`, data, {
             headers: {

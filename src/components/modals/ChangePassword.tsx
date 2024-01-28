@@ -6,6 +6,9 @@ import BackLinkWithCross from '../common/BackTextWithCross'
 import Button from '../UI/buttons/Button'
 import Input from '../UI/inputs/Input'
 import InputWrapper from '../UI/inputs/InputWrapper'
+import { useMutation } from '@tanstack/react-query'
+import { QueryKeys } from '@/utils/constants/reactQuery'
+import { userService } from '@/services/user/user.service'
 
 interface ChangePasswordProps {
     modalTitle: string
@@ -28,6 +31,15 @@ export default function ChangePassword({ modalTitle, setActive }: ChangePassword
     const isButtonDisabled =
         !value.password_1 || !value.password_2 || value.password_2 !== value.confirmPassword_2
 
+    const { mutate } = useMutation({
+        mutationKey: [QueryKeys.CHANGE_PASSWORD],
+        mutationFn: userService.changPassword,
+        onSuccess: () => {
+            setValue({ password_1: '', password_2: '', confirmPassword_2: '' })
+            setActive(false)
+        },
+    })
+
     const handleChangePassword = () => {
         if (!value.password_1 || !value.password_2) {
             return
@@ -35,7 +47,7 @@ export default function ChangePassword({ modalTitle, setActive }: ChangePassword
         if (value.password_2 !== value.confirmPassword_2) {
             return
         }
-        setValue({ password_1: '', password_2: '', confirmPassword_2: '' })
+        mutate({ password_1: value.password_1, password_2: value.password_2 })
     }
 
     return (
