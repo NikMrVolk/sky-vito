@@ -16,12 +16,7 @@ export default function Button({ children, className, onClick, disabled = false 
                     ${disabled ? 'bg-gray-400 hover:bg-gray-400' : 'active:translate-y-px'}`,
                 className,
             )}
-            onClick={e => {
-                e.preventDefault()
-                if (onClick) {
-                    onClick()
-                }
-            }}
+            onClick={onClick}
             disabled={disabled}
         >
             {children}

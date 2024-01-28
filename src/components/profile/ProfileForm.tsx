@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import ChangePassword from '../modals/ChangePassword'
 import Button from '../UI/buttons/Button'
 import Input from '../UI/inputs/Input'
 import InputWrapper from '../UI/inputs/InputWrapper'
-import Modal from '../UI/modals/Modal'
 
 import { useChangeUserData } from '@/hooks/user/useChangeUserData'
 import { ChangeUserDataRequest } from '@/services/user/user.types'
@@ -27,7 +25,6 @@ export default function ProfileForm() {
     const [changeIndicators, setChangeIndicators] = useState<IProfileForm>(
         JSON.parse(JSON.stringify(value)),
     )
-    const [modalActive, setModalActive] = useState<boolean>(false)
 
     const getTitleColor = (key: 'name' | 'surname' | 'city' | 'phone'): string =>
         changeIndicators[key] !== value[key] ? 'text-layoutBlue' : 'text-layoutLightGray'
@@ -41,10 +38,6 @@ export default function ProfileForm() {
             }
             changeUserData(dataToSend)
         }
-    }
-
-    const handleOpenModal = () => {
-        setModalActive(true)
     }
 
     useEffect(() => {
@@ -63,7 +56,7 @@ export default function ProfileForm() {
     if (!userData) return <></>
 
     return (
-        <form className="flex max-w-153.5 flex-col gap-4.5 sm:w-full">
+        <form className="flex max-w-153.5 flex-col gap-4.5 sm:w-full" onSubmit={e => e.preventDefault()}>
             <div className="flex flex-col gap-4.5 lg:flex-row">
                 <InputWrapper
                     title="Имя"
@@ -110,17 +103,9 @@ export default function ProfileForm() {
                     onChange={e => setValue({ ...value, phone: e.target.value })}
                 />
             </InputWrapper>
-            <div className="flex flex-col gap-4 sm:flex-row">
-                <Button className="py-2.75 sm:max-w-40" onClick={handleSaveForm}>
-                    Сохранить
-                </Button>
-                <Button className="py-2.75 " onClick={handleOpenModal}>
-                    Редактировать пароль
-                </Button>
-            </div>
-            <Modal active={modalActive} setActive={setModalActive}>
-                <ChangePassword modalTitle="Изменение пароля" setActive={setModalActive} />
-            </Modal>
+            <Button className="py-2.75 sm:max-w-40" onClick={handleSaveForm}>
+                Сохранить
+            </Button>
         </form>
     )
 }
