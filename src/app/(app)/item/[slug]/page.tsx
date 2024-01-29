@@ -15,7 +15,7 @@ import { API_URL, SELLER_ROUTE } from '@/utils/constants/routes'
 
 export default function ItemPage({ params }: { params: { slug: string } }) {
     const { data } = useQuery({
-        queryKey: [QueryKeys.GET_ONE_AD],
+        queryKey: [QueryKeys.GET_ONE_AD + params.slug],
         queryFn: () => itemsService.getOne(params.slug),
     })
 

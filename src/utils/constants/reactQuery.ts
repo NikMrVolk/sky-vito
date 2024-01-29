@@ -17,4 +17,5 @@ export enum QueryKeys {
     CHANGE_USER_IMG = 'change-user-img',
     CHANGE_PASSWORD = 'change-password',
     DELETE_ITEM = 'delete-item',
+    DELETE_IMAGE = 'delete-image',
 }

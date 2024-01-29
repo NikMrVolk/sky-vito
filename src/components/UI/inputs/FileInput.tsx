@@ -12,11 +12,12 @@ import { ImageType } from '@/services/items/items.types'
 interface FileInputProps {
     files: (File | ImageType)[] | null
     setFiles: (e: (File | ImageType)[] | null) => void
+    deletePhoto: (file_url: string) => void
 }
 
 const ss = ['1', '1', '1', '1', '1']
 
-export default function FileInput({ files, setFiles }: FileInputProps) {
+export default function FileInput({ files, setFiles, deletePhoto }: FileInputProps) {
     const checkingMaxNumberImages = (
         files: (File | ImageType)[] | null,
         arrFiles: (File | ImageType)[],
@@ -52,6 +53,11 @@ export default function FileInput({ files, setFiles }: FileInputProps) {
     }
 
     const handleDeleteFiles = (id: number) => {
+        if (files && Object.prototype.hasOwnProperty.call(files[id], 'url')) {
+            const file = files[id] as ImageType
+            deletePhoto(file.url)
+        }
+
         const filesAfterDelete = files?.filter((_, index) => index !== id)
         filesAfterDelete?.length ? setFiles(filesAfterDelete) : setFiles(null)
     }

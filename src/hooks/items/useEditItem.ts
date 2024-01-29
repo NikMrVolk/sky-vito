@@ -6,7 +6,7 @@ import { QueryKeys } from '@/utils/constants/reactQuery'
 
 export const useEditItem = (onSuccess: () => void, slug: string) => {
     const { refetch } = useQuery({
-        queryKey: [QueryKeys.GET_ONE_AD],
+        queryKey: [QueryKeys.GET_ONE_AD + slug],
         queryFn: () => itemsService.getOne(slug),
         enabled: false,
     })

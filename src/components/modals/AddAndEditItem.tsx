@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 /* eslint-disable complexity */
 //todo: edit component to remove eslintIgnore
 'use client'
@@ -16,6 +17,7 @@ import TextArea from '../UI/inputs/TextArea'
 import { useAddItem } from '@/hooks/items/useAddItem'
 import { useEditItem } from '@/hooks/items/useEditItem'
 import { ImageType } from '@/services/items/items.types'
+import { useDeleteItemAndImg } from '@/hooks/items/useDeleteItemAndImg'
 
 interface AddAndEditItemProps {
     modalTitle: string
@@ -48,6 +50,7 @@ export default function AddAndEditItem({ setActive, startValue, modalTitle }: Ad
 
     const { addItemWithImg, addItemWithoutImg, isPending } = useAddItem(onAddItemSuccess)
     const { changeItemText, addImgToItem } = useEditItem(() => setActive(false), slug)
+    const { deleteImage } = useDeleteItemAndImg(slug)
 
     const handleAddItem = () => {
         if (startValue) {
@@ -73,6 +76,10 @@ export default function AddAndEditItem({ setActive, startValue, modalTitle }: Ad
 
             files ? addItemWithImg({ ...value, formData }) : addItemWithoutImg(value)
         }
+    }
+
+    const handleDeletePhoto = (file_url: string) => {
+        deleteImage({ slug, file_url })
     }
 
     useEffect(() => {
@@ -108,7 +115,7 @@ export default function AddAndEditItem({ setActive, startValue, modalTitle }: Ad
                 />
             </InputWrapper>
             <InputWrapper title="Фотографии товара" description="не более 5 фотографий">
-                <FileInput files={files} setFiles={setFiles} />
+                <FileInput files={files} setFiles={setFiles} deletePhoto={handleDeletePhoto} />
             </InputWrapper>
             <InputWrapper>
                 <div className="relative">

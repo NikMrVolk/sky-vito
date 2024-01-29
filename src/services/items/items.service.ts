@@ -65,6 +65,17 @@ export const itemsService = {
         return response
     },
 
+    async deleteImage(data: { slug: string; file_url: string }) {
+        const response = await instance.delete<ItemType>(`/ads/${data.slug}/image`, {
+            params: {
+                pk: data.slug,
+                file_url: data.file_url,
+            },
+        })
+
+        return response
+    },
+
     async getAllComments() {
         const response = await axiosClassic.get<IComments[]>(`/comments`)
 
