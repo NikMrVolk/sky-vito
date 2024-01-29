@@ -20,7 +20,7 @@ export default function ItemPage({ params }: { params: { slug: string } }) {
     })
 
     const { data: comments } = useQuery({
-        queryKey: [QueryKeys.GET_AD_COMMENTS],
+        queryKey: [QueryKeys.GET_AD_COMMENTS + params.slug],
         queryFn: () => itemsService.getItemComments(params.slug),
     })
 

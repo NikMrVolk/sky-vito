@@ -11,6 +11,7 @@ export enum QueryKeys {
     ADD_ITEM_WITHOUT_IMGS = 'add-item-without-imgs',
     ADD_ITEM_WITH_IMGS = 'add-item-with-imgs',
     ADD_IMG_TO_ITEM = 'add-img-to-item',
+    ADD_COMMENT_TO_ITEM = 'add-comment-to-item',
     CHANGE_ITEM_TEXT = 'change-item-text',
     CHANGE_USER_DATA = 'change-user-data',
     CHANGE_USER_IMG = 'change-user-img',

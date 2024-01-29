@@ -76,4 +76,10 @@ export const itemsService = {
 
         return response
     },
+
+    async addComment(data: { data: { text: string }; slug: string }) {
+        const response = await instance.post<IComments>(`/ads/${data.slug}/comments`, data.data)
+
+        return response
+    },
 }
