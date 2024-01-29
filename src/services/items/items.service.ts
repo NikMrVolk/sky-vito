@@ -70,4 +70,10 @@ export const itemsService = {
 
         return response
     },
+
+    async getItemComments(slug: string) {
+        const response = await axiosClassic.get<IComments[]>(`/ads/${slug}/comments`)
+
+        return response
+    },
 }

@@ -4,6 +4,7 @@ export enum QueryKeys {
     GET_ADS = 'get-ads',
     GET_USER_ADS = 'get-user-ads',
     GET_ONE_AD = 'get-one-ad',
+    GET_AD_COMMENTS = 'get-ad-comments',
     GET_ALL_COMMENTS = 'get-all-comments',
     GET_ALL_USERS = 'get-all-users',
     GET_CURRENT_USER = 'get-current-user',

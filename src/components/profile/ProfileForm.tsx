@@ -56,7 +56,10 @@ export default function ProfileForm() {
     if (!userData) return <></>
 
     return (
-        <form className="flex max-w-153.5 flex-col gap-4.5 sm:w-full" onSubmit={e => e.preventDefault()}>
+        <form
+            className="flex max-w-153.5 flex-col gap-4.5 sm:w-full"
+            onSubmit={e => e.preventDefault()}
+        >
             <div className="flex flex-col gap-4.5 lg:flex-row">
                 <InputWrapper
                     title="Имя"
