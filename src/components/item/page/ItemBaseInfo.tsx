@@ -30,7 +30,9 @@ export default function ItemBaseInfo({
                 <div>{createdOn}</div>
                 <div>{city}</div>
                 <div className="inline text-layoutBlue">
-                    <span onClick={() => setActive(true)}>{comments.length} отзывов</span>
+                    <span className="cursor-pointer" onClick={() => setActive(true)}>
+                        {comments.length} отзывов
+                    </span>
                 </div>
             </div>
             <div className="text-lg font-bold lg:text-2.5xl">{price} ₽</div>
