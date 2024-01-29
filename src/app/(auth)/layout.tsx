@@ -3,6 +3,7 @@ import { Roboto } from 'next/font/google'
 
 import { cn } from '@/lib/className'
 import { Providers } from '@/lib/Providers'
+import Toast from '@/lib/Toast'
 
 import '../globals.css'
 
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <html lang="en">
                 <body className={cn('h-screen', roboto.className)}>
                     <main className="flex h-full items-center justify-center">{children}</main>
+                    <Toast />
                 </body>
             </html>
         </Providers>

@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 import BackLinkWithCross from '../common/BackTextWithCross'
 import Button from '../UI/buttons/Button'
@@ -42,10 +43,12 @@ export default function AddComment({ setActive, comments }: AddCommentProps) {
     })
 
     const handleAddComment = () => {
-        if (value) {
+        if (value.length > 5) {
             const data = { data: { text: value }, slug }
             addComment(data)
+            return
         }
+        toast('Комментарий должен быть больше 5ти символов')
     }
 
     return (

@@ -6,6 +6,7 @@ import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import { cn } from '@/lib/className'
 import { Providers } from '@/lib/Providers'
+import Toast from '@/lib/Toast'
 
 import '../globals.css'
 
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
                     <main className="h-full">{children}</main>
                     <Footer />
+                    <Toast />
                 </body>
             </html>
         </Providers>
