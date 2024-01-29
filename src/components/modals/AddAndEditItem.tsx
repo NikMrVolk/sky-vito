@@ -121,7 +121,11 @@ export default function AddAndEditItem({ setActive, startValue, modalTitle }: Ad
                 <div className="relative">
                     <Input
                         value={value.price}
-                        onChange={e => setValue({ ...value, price: +e.target.value })}
+                        onChange={e => {
+                            if (/^\d{1,15}$/.test(e.target.value) || e.target.value === '') {
+                                setValue({ ...value, price: +e.target.value })
+                            }
+                        }}
                         className="w-full"
                     />
                     <span className="absolute bottom-1/3 right-4 text-base leading-4">₽</span>
