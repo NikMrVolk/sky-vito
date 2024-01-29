@@ -5,16 +5,22 @@ import { ChangeEvent } from 'react'
 import { MinusCircle } from 'lucide-react'
 import Image from 'next/image'
 
+import { API_URL } from '@/utils/constants/routes'
+import { toast } from 'react-toastify'
+import { ImageType } from '@/services/items/items.types'
+
 interface FileInputProps {
-    classes?: { wrapper?: string; title?: string; description?: string; label?: string }
-    files: File[] | null
-    setFiles: (e: File[] | null) => void
+    files: (File | ImageType)[] | null
+    setFiles: (e: (File | ImageType)[] | null) => void
 }
 
 const ss = ['1', '1', '1', '1', '1']
 
 export default function FileInput({ files, setFiles }: FileInputProps) {
-    const checkingMaxNumberImages = (files: File[] | null, arrFiles: File[]) => {
+    const checkingMaxNumberImages = (
+        files: (File | ImageType)[] | null,
+        arrFiles: (File | ImageType)[],
+    ) => {
         let newArr = []
 
         if (files?.length) {
@@ -24,8 +30,8 @@ export default function FileInput({ files, setFiles }: FileInputProps) {
         }
 
         if (newArr.length > 5) {
-            // todo: Add toast!
-            alert('Больше 5 нельзя')
+            toast('Больше 5 нельзя')
+
             newArr.length = 5
         }
 
@@ -34,7 +40,7 @@ export default function FileInput({ files, setFiles }: FileInputProps) {
 
     const handleChangeFiles = (e: ChangeEvent<HTMLInputElement>) => {
         const addedFiles = e.target.files
-        const arrFiles = []
+        const arrFiles: (File | ImageType)[] = []
 
         if (addedFiles) {
             for (let i = 0; i < addedFiles.length; i++) {
@@ -50,6 +56,15 @@ export default function FileInput({ files, setFiles }: FileInputProps) {
         filesAfterDelete?.length ? setFiles(filesAfterDelete) : setFiles(null)
     }
 
+    const getImgUrl = (files: (File | ImageType)[], id: number) => {
+        if (Object.prototype.hasOwnProperty.call(files[id], 'url')) {
+            const element = files[id] as ImageType
+            return API_URL + element.url
+        }
+        const element = files[id] as File
+        return URL.createObjectURL(element)
+    }
+
     return (
         <>
             <div className="flex gap-2.5 overflow-x-scroll pb-2 pt-2 sm:overflow-x-hidden">
@@ -60,7 +75,7 @@ export default function FileInput({ files, setFiles }: FileInputProps) {
                             className="relative flex h-22.5 w-22.5 items-center justify-center bg-gray-400"
                         >
                             <Image
-                                src={URL.createObjectURL(files[id])}
+                                src={getImgUrl(files, id)}
                                 alt="photo"
                                 width={90}
                                 height={90}
