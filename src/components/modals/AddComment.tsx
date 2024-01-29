@@ -3,11 +3,11 @@
 import { useState } from 'react'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
-import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import BackLinkWithCross from '../common/BackTextWithCross'
+import ProfilePhoto from '../profile/ProfilePhoto'
 import Button from '../UI/buttons/Button'
 import InputWrapper from '../UI/inputs/InputWrapper'
 import TextArea from '../UI/inputs/TextArea'
@@ -71,17 +71,10 @@ export default function AddComment({ setActive, comments }: AddCommentProps) {
             <div className="flex flex-col gap-7.5 sm:max-h-75">
                 {sortedComments.map(el => (
                     <div key={el.id} className="flex gap-3">
-                        {el.author.avatar ? (
-                            <Image
-                                src={API_URL + el.author.avatar}
-                                alt="avatar"
-                                width={40}
-                                height={40}
-                                className="h-10 w-10 rounded-full "
-                            />
-                        ) : (
-                            <div className="h-10 w-10 rounded-full bg-layoutGray/50 px-5" />
-                        )}
+                        <ProfilePhoto
+                            imgSrc={API_URL + el.author.avatar}
+                            classes={{ wrapper: 'h-10 w-10 sm:h-10 sm:w-10' }}
+                        />
                         <div className="flex flex-col gap-3">
                             <div className="flex gap-2.5">
                                 <div>{el.author.name}</div>

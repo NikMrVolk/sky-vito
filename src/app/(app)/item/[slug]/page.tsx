@@ -1,7 +1,6 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import IsAuthComponent from '@/components/common/IsAuthComponent'
@@ -12,6 +11,7 @@ import ItemPhotos from '@/components/item/page/ItemPhotos'
 import { itemsService } from '@/services/items/items.service'
 import { QueryKeys } from '@/utils/constants/reactQuery'
 import { API_URL, SELLER_ROUTE } from '@/utils/constants/routes'
+import ProfilePhoto from '@/components/profile/ProfilePhoto'
 
 export default function ItemPage({ params }: { params: { slug: string } }) {
     const { data } = useQuery({
@@ -33,7 +33,7 @@ export default function ItemPage({ params }: { params: { slug: string } }) {
             <div className="flex flex-col gap-7.5 sm:flex-row xl:gap-15">
                 <ItemPhotos images={data?.data.images} />
                 <div className="flex flex-col gap-7.5">
-                    {data?.data && comments?.data && (
+                    {comments?.data && (
                         <ItemBaseInfo
                             title={data?.data.title}
                             createdOn={data?.data.created_on}
@@ -45,15 +45,10 @@ export default function ItemPage({ params }: { params: { slug: string } }) {
                     <ItemButtons itemData={data?.data} />
                     <Link href={SELLER_ROUTE + `/${data?.data.user.id}`}>
                         <div className="flex gap-3">
-                            <div className="h-10 w-10 rounded-full bg-layoutGray/30">
-                                <Image
-                                    src={`${API_URL + data?.data.user.avatar}`}
-                                    alt="photo"
-                                    width={100}
-                                    height={100}
-                                    className="h-full w-full"
-                                />
-                            </div>
+                            <ProfilePhoto
+                                imgSrc={API_URL + data?.data.user.avatar}
+                                classes={{ wrapper: 'h-10 w-10 sm:h-10 sm:w-10' }}
+                            />
                             <div>
                                 <div className="text-lg text-layoutBlue lg:text-lg">
                                     {data?.data.user.name}

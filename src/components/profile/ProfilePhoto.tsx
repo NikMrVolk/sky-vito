@@ -1,3 +1,4 @@
+import { User } from 'lucide-react'
 import Image from 'next/image'
 
 import { cn } from '@/lib/className'
@@ -15,21 +16,20 @@ export default function ProfilePhoto({
     return (
         <div
             className={cn(
-                'h-33 w-33 rounded-full bg-layoutGray/30 sm:h-42.5 sm:w-42.5',
+                `h-33 w-33 rounded-full sm:h-42.5 sm:w-42.5 ${imgSrc !== API_URL + null ? 'bg-layoutGray/30' : ''}`,
                 classes.wrapper,
             )}
         >
-            {imgSrc && (
+            {imgSrc !== API_URL + null ? (
                 <Image
                     src={imgSrc}
                     alt="photo"
                     width={100}
                     height={100}
-                    className={cn(
-                        `h-full w-full rounded-full ${imgSrc === API_URL + null ? 'hidden' : ''}`,
-                        classes.img,
-                    )}
+                    className={cn('h-full w-full rounded-full', classes.img)}
                 />
+            ) : (
+                <User className="h-full w-full rounded-full" />
             )}
         </div>
     )

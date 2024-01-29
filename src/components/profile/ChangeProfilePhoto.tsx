@@ -28,8 +28,6 @@ export default function ChangeProfilePhoto() {
         }
     }
 
-    console.log(userData)
-
     useEffect(() => {
         setFile(null)
     }, [userData?.avatar])
