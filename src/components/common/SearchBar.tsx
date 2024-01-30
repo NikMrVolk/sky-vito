@@ -6,12 +6,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import useSearchStore from '../../../store/useSearchStore'
 import Button from '../UI/buttons/Button'
 import SearchInput from '../UI/inputs/SearchInput'
 
 import BlockWrapper from './wrappers/BlockWrapper'
 
+import useSearchStore from '@/store/useSearchStore'
 import { MAIN_ROUTE } from '@/utils/constants/routes'
 
 export default function SearchBar() {

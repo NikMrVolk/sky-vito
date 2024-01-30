@@ -4,11 +4,12 @@ import { useState } from 'react'
 
 import Image from 'next/image'
 
-import useSearchStore from '../../../store/useSearchStore'
 import BlockWrapper from '../common/wrappers/BlockWrapper'
 import SearchInput from '../UI/inputs/SearchInput'
 
 import HeaderButtons from './HeaderButtons'
+
+import useSearchStore from '@/store/useSearchStore'
 
 export default function Header() {
     const { setSearchState } = useSearchStore(s => s)

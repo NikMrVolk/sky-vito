@@ -5,8 +5,8 @@ import { useQuery } from '@tanstack/react-query'
 import BlockWrapper from '@/components/common/wrappers/BlockWrapper'
 import ItemsList from '@/components/item/ItemsList'
 import { itemsService } from '@/services/items/items.service'
+import useSearchStore from '@/store/useSearchStore'
 import { QueryKeys } from '@/utils/constants/reactQuery'
-import useSearchStore from '../../../store/useSearchStore'
 
 export default function Home() {
     const { search } = useSearchStore(s => s)
