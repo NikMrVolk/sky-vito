@@ -5,7 +5,6 @@ import File from '../UI/inputs/File'
 import ProfilePhoto from './ProfilePhoto'
 
 import { useChangeUserData } from '@/hooks/user/useChangeUserData'
-import { API_URL } from '@/utils/constants/routes'
 
 export default function ChangeProfilePhoto() {
     const [file, setFile] = useState<File | null>(null)
@@ -28,13 +27,21 @@ export default function ChangeProfilePhoto() {
         }
     }
 
+    console.log(process.env.NEXT_PUBLIC_API_URL)
+
     useEffect(() => {
         setFile(null)
     }, [userData?.avatar])
 
     return (
         <div className="flex flex-col items-center gap-2.5">
-            <ProfilePhoto imgSrc={file ? URL.createObjectURL(file) : API_URL + userData?.avatar} />
+            <ProfilePhoto
+                imgSrc={
+                    file
+                        ? URL.createObjectURL(file)
+                        : (process.env.NEXT_PUBLIC_API_URL as string) + userData?.avatar
+                }
+            />
             {isAddImgLoading ? (
                 <div>Загрузка...</div>
             ) : (

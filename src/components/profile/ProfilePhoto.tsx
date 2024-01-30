@@ -2,7 +2,6 @@ import { User } from 'lucide-react'
 import Image from 'next/image'
 
 import { cn } from '@/lib/className'
-import { API_URL } from '@/utils/constants/routes'
 
 interface ProfilePhotoProps {
     imgSrc: string
@@ -16,11 +15,11 @@ export default function ProfilePhoto({
     return (
         <div
             className={cn(
-                `h-33 w-33 rounded-full sm:h-42.5 sm:w-42.5 ${imgSrc !== API_URL + null ? 'bg-layoutGray/30' : ''}`,
+                `h-33 w-33 rounded-full sm:h-42.5 sm:w-42.5 ${imgSrc !== (process.env.NEXT_PUBLIC_API_URL as string) + null ? 'bg-layoutGray/30' : ''}`,
                 classes.wrapper,
             )}
         >
-            {imgSrc !== API_URL + null ? (
+            {imgSrc !== (process.env.NEXT_PUBLIC_API_URL as string) + null ? (
                 <Image
                     src={imgSrc}
                     alt="photo"

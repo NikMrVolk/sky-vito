@@ -4,12 +4,10 @@ import axios, { CreateAxiosDefaults } from 'axios'
 import { getContentType } from './api.helpers'
 
 import { authService } from '@/services/auth/auth.service'
-import { API_URL } from '../constants/routes'
 import { getAccessToken, getRefreshToken, removeFromStorage } from '@/services/auth/auth.helpers'
 
 const axiosOptions: CreateAxiosDefaults = {
-    // baseURL: process.env.API_URL,
-    baseURL: API_URL,
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
     headers: getContentType(),
     withCredentials: true,
 }

@@ -15,7 +15,6 @@ import TextArea from '../UI/inputs/TextArea'
 import { itemsService } from '@/services/items/items.service'
 import { IComments } from '@/services/items/items.types'
 import { QueryKeys } from '@/utils/constants/reactQuery'
-import { API_URL } from '@/utils/constants/routes'
 
 interface AddCommentProps {
     setActive: (v: boolean) => void
@@ -72,7 +71,7 @@ export default function AddComment({ setActive, comments }: AddCommentProps) {
                 {sortedComments.map(el => (
                     <div key={el.id} className="flex gap-3">
                         <ProfilePhoto
-                            imgSrc={API_URL + el.author.avatar}
+                            imgSrc={process.env.NEXT_PUBLIC_API_URL + el.author.avatar}
                             classes={{ wrapper: 'h-10 w-10 sm:h-10 sm:w-10' }}
                         />
                         <div className="flex flex-col gap-3">

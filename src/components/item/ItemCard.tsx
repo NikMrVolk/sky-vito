@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import useScreenSize from '@/hooks/common/useScreenSize'
-import { API_URL, ITEM_ROUTE } from '@/utils/constants/routes'
+import { ITEM_ROUTE } from '@/utils/constants/routes'
 import { cuttingItemNameInCard } from '@/utils/formatting/cuttingItemNameInCard'
 
 interface ItemCardProps {
@@ -28,7 +28,7 @@ export default function ItemCard({ id, imgLink, itemName, city, created, price }
                 <div className="min-h-33 rounded-t-md bg-gray-300 bg-cover bg-center bg-no-repeat sm:h-67.5">
                     {imgLink ? (
                         <Image
-                            src={`${API_URL + imgLink}`}
+                            src={`${process.env.NEXT_PUBLIC_API_URL + imgLink}`}
                             alt="photo"
                             width={100}
                             height={100}

@@ -10,7 +10,7 @@ import ItemButtons from '@/components/item/page/ItemButtons'
 import ItemPhotos from '@/components/item/page/ItemPhotos'
 import { itemsService } from '@/services/items/items.service'
 import { QueryKeys } from '@/utils/constants/reactQuery'
-import { API_URL, SELLER_ROUTE } from '@/utils/constants/routes'
+import { SELLER_ROUTE } from '@/utils/constants/routes'
 import ProfilePhoto from '@/components/profile/ProfilePhoto'
 
 export default function ItemPage({ params }: { params: { slug: string } }) {
@@ -46,7 +46,7 @@ export default function ItemPage({ params }: { params: { slug: string } }) {
                     <Link href={SELLER_ROUTE + `/${data?.data.user.id}`}>
                         <div className="flex gap-3">
                             <ProfilePhoto
-                                imgSrc={API_URL + data?.data.user.avatar}
+                                imgSrc={process.env.NEXT_PUBLIC_API_URL + data?.data.user.avatar}
                                 classes={{ wrapper: 'h-10 w-10 sm:h-10 sm:w-10' }}
                             />
                             <div>

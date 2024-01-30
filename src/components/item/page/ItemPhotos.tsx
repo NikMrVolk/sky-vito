@@ -9,7 +9,7 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
 import { ImageType } from '@/services/items/items.types'
 import { getOS } from '@/utils/common/getOS'
-import { API_URL, MAIN_ROUTE } from '@/utils/constants/routes'
+import { MAIN_ROUTE } from '@/utils/constants/routes'
 
 import 'swiper/css'
 import 'swiper/css/effect-cube'
@@ -50,7 +50,7 @@ export default function ItemPhotos({ images }: { images: ImageType[] | undefined
                     {images?.map(el => (
                         <SwiperSlide key={el.url} className="relative">
                             <Image
-                                src={API_URL + el.url}
+                                src={process.env.NEXT_PUBLIC_API_URL + el.url}
                                 alt="item"
                                 height={320}
                                 width={200}
@@ -85,7 +85,7 @@ export default function ItemPhotos({ images }: { images: ImageType[] | undefined
                         {images?.map(el => (
                             <SwiperSlide key={el.url}>
                                 <Image
-                                    src={API_URL + el.url}
+                                    src={process.env.NEXT_PUBLIC_API_URL + el.url}
                                     alt="item"
                                     height={320}
                                     width={200}

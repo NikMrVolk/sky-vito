@@ -5,7 +5,6 @@ import { ChangeEvent } from 'react'
 import { MinusCircle } from 'lucide-react'
 import Image from 'next/image'
 
-import { API_URL } from '@/utils/constants/routes'
 import { toast } from 'react-toastify'
 import { ImageType } from '@/services/items/items.types'
 
@@ -65,7 +64,7 @@ export default function FileInput({ files, setFiles, deletePhoto }: FileInputPro
     const getImgUrl = (files: (File | ImageType)[], id: number) => {
         if (Object.prototype.hasOwnProperty.call(files[id], 'url')) {
             const element = files[id] as ImageType
-            return API_URL + element.url
+            return process.env.NEXT_PUBLIC_API_URL + element.url
         }
         const element = files[id] as File
         return URL.createObjectURL(element)
