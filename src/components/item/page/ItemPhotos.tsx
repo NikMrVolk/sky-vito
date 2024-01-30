@@ -54,7 +54,7 @@ export default function ItemPhotos({ images }: { images: ImageType[] | undefined
                                 alt="item"
                                 height={320}
                                 width={200}
-                                className="h-80 w-full lg:h-120"
+                                className="h-80 w-full object-cover lg:h-120"
                             />
                             <Image
                                 src="/images/icons/itemVector.png"

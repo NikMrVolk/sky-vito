@@ -32,7 +32,7 @@ export default function ItemCard({ id, imgLink, itemName, city, created, price }
                             alt="photo"
                             width={100}
                             height={100}
-                            className="h-full w-full"
+                            className="h-33 max-h-33 w-full object-cover sm:h-full sm:max-h-67.5"
                         />
                     ) : (
                         <></>
