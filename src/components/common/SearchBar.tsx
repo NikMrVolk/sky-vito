@@ -1,9 +1,12 @@
 'use client'
 
+import { useState } from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+import useSearchStore from '../../../store/useSearchStore'
 import Button from '../UI/buttons/Button'
 import SearchInput from '../UI/inputs/SearchInput'
 
@@ -12,6 +15,8 @@ import BlockWrapper from './wrappers/BlockWrapper'
 import { MAIN_ROUTE } from '@/utils/constants/routes'
 
 export default function SearchBar() {
+    const { setSearchState } = useSearchStore(s => s)
+    const [value, setValue] = useState<string>('')
     const pathname = usePathname()
 
     return (
@@ -28,6 +33,11 @@ export default function SearchBar() {
                     <SearchInput
                         placeholder="Поиск по объявлениям"
                         className="w-full rounded-md border p-3"
+                        value={value}
+                        onChange={v => {
+                            setSearchState({ search: v })
+                            setValue(v)
+                        }}
                     />
                     <Button>Найти</Button>
                 </div>

@@ -4,12 +4,16 @@ interface SearchInputProps {
     className?: string
     type?: string
     placeholder?: string
+    value: string
+    onChange: (v: string) => void
 }
 
 export default function SearchInput({
     className = '',
     type = 'text',
     placeholder = 'Поиск',
+    value,
+    onChange,
 }: SearchInputProps) {
     return (
         <input
@@ -19,6 +23,8 @@ export default function SearchInput({
             )}
             type={type}
             placeholder={placeholder}
+            value={value}
+            onChange={e => onChange(e.target.value)}
         />
     )
 }
